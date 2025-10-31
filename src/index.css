@@ -1,0 +1,39 @@
+:root {
+    --bgColor: #000000;
+    --white: #fffaf5;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    background-color: var(--bgColor);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+}
+
+header ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+}
+
+svg {
+    fill: var(--white);
+    height: 2rem;
+    width: 2rem;
+}
