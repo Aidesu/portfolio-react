@@ -1,7 +1,7 @@
 export default function About() {
     return (
         <>
-            <main>
+            <main id="aboutMain">
                 <h2>About me</h2>
                 <p>
                     Passionate about computing and new technologies from a young

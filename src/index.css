@@ -1,6 +1,10 @@
 :root {
-    --bgColor: #000000;
-    --white: #fffaf5;
+    --bgColor: hsl(0, 0%, 0%);
+    --cardColor: hsl(0, 0%, 5%);
+    --highColor: hsl(0, 0%, 10%);
+    --firstText: hsl(0, 0%, 95%);
+    --secText: hsl(0, 0%, 70%);
+    --accentColor: hsl(306, 57%, 61%);
 }
 
 * {
@@ -10,8 +14,12 @@
 
 html {
     background-color: var(--bgColor);
-    color: var(--white);
-    font-family: Arial, Helvetica, sans-serif;
+    color: var(--firstText);
+    font-family: "Karla", Arial, Helvetica, sans-serif;
+}
+
+main {
+    margin-top: 8rem;
 }
 
 header {
@@ -23,6 +31,11 @@ header {
     align-items: center;
     justify-content: space-between;
     width: 90%;
+    height: 4rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
 }
 
 header ul {
@@ -32,8 +45,161 @@ header ul {
     align-items: center;
 }
 
+header ol {
+    display: flex;
+    gap: o;
+    list-style: none;
+    align-items: center;
+}
+
+a svg {
+    fill: var(--firstText);
+}
+
 svg {
-    fill: var(--white);
     height: 2rem;
     width: 2rem;
+}
+
+a svg:hover {
+    fill: var(--accentColor);
+}
+
+header svg:hover {
+    transform: scale(1.1);
+    transform: translate(0, -0.2rem);
+    transition: 0.2s;
+}
+
+header a {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 0.5rem;
+    color: var(--firstText);
+    text-decoration: none;
+    transform: scale(0.9);
+    font-size: 1.5rem;
+    transition: 0.2s;
+    display: inline-block;
+}
+
+a:hover {
+    color: var(--accentColor);
+    transform: scale(1);
+    font-weight: 600;
+}
+
+button {
+    background-color: var(--highColor);
+    padding: 0.5rem 1rem;
+    color: var(--firstText);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1.25rem;
+    width: 9rem;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 1px 2px 1px var(--accentColor);
+    transition: 0.2s;
+}
+
+span {
+    color: var(--accentColor);
+}
+
+#homeMain {
+    text-align: start;
+    margin-top: 16rem;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+}
+
+#homeMain h1 {
+    font-size: 5rem;
+    margin: 0.5rem 0;
+}
+
+#homeMain h3 {
+    font-size: 1.75rem;
+    font-weight: 400;
+}
+
+#homeMain p {
+    width: 90%;
+    color: var(--secText);
+    font-size: 1.25rem;
+}
+
+#homeMain img {
+    border-radius: 50%;
+    width: 30rem;
+}
+
+#aboutMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+}
+
+#aboutMain h2 {
+    font-size: 3rem;
+}
+
+#aboutMain p {
+    text-align: justify;
+    width: 80%;
+    font-size: 1.5rem;
+}
+
+#projectsMain ul {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    gap: 2rem;
+}
+
+#projectsMain li {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cardColor);
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+#projectsMain ol {
+    display: flex;
+    justify-content: space-between;
+    text-align: start;
+    height: 30%;
+}
+
+#projectsMain ol li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+#projectsMain ol li:nth-child(2) {
+    text-align: end;
+}
+
+#projectsMain h3 {
+    font-size: 1.5rem;
+}
+
+#projectsMain p {
+    color: var(--secText);
+    font-size: 1rem;
+}
+
+#projectsMain img {
+    height: 70%;
+    object-fit: contain;
+    padding: 2rem;
+    border-bottom: solid var(--secText) 2px;
 }

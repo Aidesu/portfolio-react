@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export default function Header() {
     return (
         <>
@@ -7,16 +9,26 @@ export default function Header() {
                 </h1>
                 <nav>
                     <ul>
-                        <li>Home</li>
-                        <li>About</li>
-                        <li>Projects</li>
-                        <li>Skills</li>
-                        <li>Contact</li>
+                        <li>
+                            <Link to={"/"}>Home</Link>
+                        </li>
+                        <li>
+                            <Link to={"/about"}>About</Link>
+                        </li>
+                        <li>
+                            <Link to={"/projects"}>Projects</Link>
+                        </li>
+                        <li>
+                            <Link to={"/skills"}>Skills</Link>
+                        </li>
+                        <li>
+                            <Link to={"/contact"}>Contact</Link>
+                        </li>
                     </ul>
                 </nav>
-                <ul>
+                <ol>
                     <li>
-                        <a href="https://github.com/Aidesu">
+                        <a href="https://github.com/Aidesu" target="blank">
                             <svg
                                 role="img"
                                 viewBox="0 0 24 24"
@@ -28,7 +40,10 @@ export default function Header() {
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com/in/carla-deafiaa-96a58330a/">
+                        <a
+                            href="https://www.linkedin.com/in/carla-deafiaa-96a58330a/"
+                            target="blank"
+                        >
                             <svg
                                 role="img"
                                 viewBox="0 0 24 24"
@@ -39,7 +54,7 @@ export default function Header() {
                             </svg>
                         </a>
                     </li>
-                </ul>
+                </ol>
             </header>
         </>
     );
