@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 
 export default function Header() {
     return (
@@ -10,19 +10,54 @@ export default function Header() {
                 <nav>
                     <ul>
                         <li>
-                            <Link to={"/"}>Home</Link>
+                            <NavLink
+                                to={"/"}
+                                className={({ isActive }) =>
+                                    isActive ? "inPage" : ""
+                                }
+                            >
+                                Home
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={"/about"}>About</Link>
+                            <NavLink
+                                to={"/about"}
+                                className={({ isActive }) =>
+                                    isActive ? "inPage" : ""
+                                }
+                            >
+                                About
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={"/projects"}>Projects</Link>
+                            <NavLink
+                                to={"/projects"}
+                                className={({ isActive }) =>
+                                    isActive ? "inPage" : ""
+                                }
+                            >
+                                Projects
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={"/skills"}>Skills</Link>
+                            <NavLink
+                                to={"/skills"}
+                                className={({ isActive }) =>
+                                    isActive ? "inPage" : ""
+                                }
+                            >
+                                Skills
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={"/contact"}>Contact</Link>
+                            <NavLink
+                                to={"/contact"}
+                                className={({ isActive }) =>
+                                    isActive ? "inPage" : ""
+                                }
+                            >
+                                Contact
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>

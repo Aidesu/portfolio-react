@@ -4,7 +4,7 @@ export default function HomeView() {
             <main id="homeMain">
                 <div>
                     <h3>
-                        <span>Web</span> developer
+                        <span>Web</span> Developer
                     </h3>
                     <h1>Carla Deafiaa</h1>
                     <p>

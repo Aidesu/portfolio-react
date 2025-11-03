@@ -6,6 +6,7 @@ import About from "./views/about/About";
 import Projects from "./views/projects/Projects";
 import Skills from "./views/skills/Skills";
 import Contact from "./views/contact/Contact";
+import OneProject from "./views/projects/OneProject";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/skills" element={<Skills />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/project/:id" element={<OneProject />} />
             </Routes>
         </>
     );
