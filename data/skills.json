@@ -63,5 +63,10 @@
         "name": "DART",
         "icon": "simple-icons:dart",
         "score": "0"
+    },
+    {
+        "name": "Ollama",
+        "icon": "simple-icons:ollama",
+        "score": "60"
     }
 ]
