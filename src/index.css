@@ -18,12 +18,14 @@
     margin: 0;
     font-family: "Karla", Arial, Helvetica, sans-serif;
     font-weight: 400;
-    background-color: black;
 }
 
 html {
-    background-color: var(--bgColor);
     color: var(--firstText);
+}
+
+body {
+    background-color: var(--bgColor);
 }
 
 main {
@@ -185,9 +187,10 @@ span {
 }
 
 #aboutMain p {
-    text-align: justify;
+    text-align: center;
     width: 80%;
     font-size: 1.5rem;
+    font-weight: 300;
 }
 
 #projectsMain ul {
@@ -253,7 +256,7 @@ span {
     margin: 10% auto;
     width: 50%;
     gap: 4rem;
-    padding: 10rem 8rem 0 8rem;
+    padding: 10rem 6rem 0 6rem;
     border-radius: 15px;
     background-color: var(--cardColor);
     position: relative;
@@ -267,6 +270,7 @@ span {
     transform: translate(-50%);
     font-size: 3rem;
     font-weight: 400;
+    background-color: transparent;
 }
 
 .mainContact input {
@@ -301,6 +305,7 @@ span {
     gap: 1rem;
     font-size: 1.75rem;
     width: 100%;
+    background-color: transparent;
 }
 
 .mainContact label {
@@ -316,4 +321,75 @@ span {
     border-radius: 10px;
     font-size: 1rem;
     padding: 1rem;
+}
+
+#skillsSection {
+    margin-top: 2rem;
+}
+
+#skillsSection ul {
+    display: grid;
+    grid-template-columns: 35% 35%;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+    list-style: none;
+}
+
+#skillsSection li {
+    background-color: var(--cardColor);
+    height: 10rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+#skillsSection p {
+    display: flex;
+    gap: 1rem;
+    align-items: start;
+    width: 100%;
+    flex-direction: column;
+}
+
+#progressBarSkills div {
+    background-color: var(--accentColor);
+    display: block;
+    height: 100%;
+    border-radius: 15px;
+}
+
+#progressBarSkills {
+    background-color: var(--bgColor);
+    display: block;
+    height: 1rem;
+    width: 40%;
+    border-radius: 15px;
+    border: solid var(--secText) 1px;
+}
+
+#skillsSection svg {
+    width: 7rem;
+    height: 7rem;
+    fill: white;
+    margin-left: 1rem;
+}
+
+#skillsSection article {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 70%;
+}
+
+#skillsSection h3 {
+    font-size: 2rem;
+}
+
+#skillsSection p {
+    font-size: 1.25rem;
 }

@@ -1,0 +1,67 @@
+[
+    {
+        "name": "Symfony",
+        "icon": "simple-icons:symfony",
+        "score": "60"
+    },
+    {
+        "name": "REACT",
+        "icon": "simple-icons:react",
+        "score": "70"
+    },
+    {
+        "name": "Docker",
+        "icon": "simple-icons:docker",
+        "score": "40"
+    },
+    {
+        "name": "PHPmyadmin",
+        "icon": "simple-icons:phpmyadmin",
+        "score": "50"
+    },
+    {
+        "name": "Node.JS",
+        "icon": "mdi:nodejs",
+        "score": "60"
+    },
+    {
+        "name": "Flutter",
+        "icon": "simple-icons:flutter",
+        "score": "0"
+    },
+    {
+        "name": "Git",
+        "icon": "simple-icons:git",
+        "score": "85"
+    },
+    {
+        "name": "MySQL",
+        "icon": "simple-icons:mysql",
+        "score": "70"
+    },
+    {
+        "name": "MongoDB",
+        "icon": "simple-icons:mongodb",
+        "score": "70"
+    },
+    {
+        "name": "Javascript",
+        "icon": "simple-icons:javascript",
+        "score": "75"
+    },
+    {
+        "name": "HTML5/CSS3",
+        "icon": "simple-icons:html5",
+        "score": "90"
+    },
+    {
+        "name": "PHP",
+        "icon": "simple-icons:php",
+        "score": "60"
+    },
+    {
+        "name": "DART",
+        "icon": "simple-icons:dart",
+        "score": "0"
+    }
+]

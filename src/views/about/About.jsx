@@ -4,18 +4,17 @@ export default function About() {
             <main id="aboutMain">
                 <h2>About me</h2>
                 <p>
-                    Passionate about computing and new technologies from a young
-                    age, I have always enjoyed understanding how systems work
-                    and improving them. I have developed strong skills in
-                    diagnosing, repairing, and optimizing computer hardware,
-                    which I apply to both personal and professional projects.
+                    I am a Web and Mobile developer, specializing in front-end
+                    (React, HTML, CSS, JavaScript) and back-end (Node.js, PHP,
+                    Symfony, SQL/NoSQL). <br />
                     <br />
-                    I constantly stay up to date with the latest technological
-                    advancements and adapt my working methods according to new
-                    trends and hardware innovations.
-                    <br />
-                    Independent and meticulous, I enjoy technical challenges and
-                    finding efficient solutions to hardware and software issues.
+                    Passionate about computing and new technologies, I build and
+                    manage my own home lab with TrueNAS, Proxmox, and Home
+                    Assistant, which allows me to experiment with and optimize
+                    real systems. <br />
+                    <br />I enjoy tackling technical challenges, creating
+                    efficient solutions, and exploring new technologies for both
+                    personal and professional projects.
                 </p>
             </main>
         </>
