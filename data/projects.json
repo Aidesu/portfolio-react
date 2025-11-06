@@ -2,7 +2,7 @@
     {
         "id": 0,
         "title": "TechMatrix",
-        "comment": "M10A - NodeJS API Evaluation",
+        "comment": "M10A - NodeJS API Evaluation Website to help choose hardware components",
         "content": "During this project, I learned how to use NodeJS and Express to develop a backend API, and how to make it communicate with a frontend built using React and Vite. I also worked with MongoDB to manage and store the application's data efficiently.",
         "type": "academic",
         "link": "https://github.com/Aidesu/TechMatrix",
@@ -42,7 +42,7 @@
     {
         "id": 1,
         "title": "My Tasks Secure",
-        "comment": "M12 - Symfony Evaluation",
+        "comment": "M12 - Symfony Evaluation Website for an secured task manager",
         "content": "This project is a secure task management web application built with the Symfony framework. It allows users to create, update, delete, and toggle the status of their personal tasks while ensuring proper authentication and authorization.",
         "type": "academic",
         "link": "https://github.com/Aidesu/my-tasks-secure-symfony",
@@ -70,7 +70,7 @@
     {
         "id": 2,
         "title": "Sanctum Faunae",
-        "comment": "M12 - Symfony Evaluation",
+        "comment": "M12 - Symfony Evaluation Website for an animal shelter",
         "content": "During this project, I learned how to use NodeJS and Express to develop a backend API, and how to make it communicate with a frontend built using React and Vite. I also worked with MongoDB to manage and store the application's data efficiently.",
         "type": "academic",
         "link": "https://github.com/Aidesu/brigitte-bdd",
@@ -92,6 +92,126 @@
             {
                 "techno_id": 1,
                 "techno_name": "MongoDB"
+            }
+        ]
+    },
+    {
+        "id": 0,
+        "title": "StellarHub",
+        "comment": "React Evaluation Social media website",
+        "content": "During this project, I learned how to use NodeJS and Express to develop a backend API, and how to make it communicate with a frontend built using React and Vite. I also worked with MongoDB to manage and store the application's data efficiently.",
+        "type": "academic",
+        "link": "https://github.com/Lasdepic/StellarHub",
+        "date": "2025-09",
+        "logo": "/projects/StellarHub/StellarHub.png",
+        "coop": true,
+        "img": [
+            {
+                "img_id": 0,
+                "img_link": "",
+                "img_alt": ""
+            }
+        ],
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "NodeJS"
+            }
+        ]
+    },
+    {
+        "id": 0,
+        "title": "Organix",
+        "comment": "HTML5/CSS3 Javascript Kanban Board",
+        "content": "During this project, I learned how to use NodeJS and Express to develop a backend API, and how to make it communicate with a frontend built using React and Vite. I also worked with MongoDB to manage and store the application's data efficiently.",
+        "type": "academic",
+        "link": "https://github.com/Aidesu/Organix",
+        "date": "2025-08-21",
+        "logo": "/projects/Organix/Organix.png",
+        "coop": true,
+        "img": [
+            {
+                "img_id": 0,
+                "img_link": "",
+                "img_alt": ""
+            }
+        ],
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "Javascript"
+            }
+        ]
+    },
+    {
+        "id": 0,
+        "title": "Domotic Home Assistant",
+        "comment": "Configuration and development of smart home devices and automations using Home Assistant.",
+        "content": "During this project, I learned how to use NodeJS and Express to develop a backend API, and how to make it communicate with a frontend built using React and Vite. I also worked with MongoDB to manage and store the application's data efficiently.",
+        "type": "personal",
+        "link": "https://github.com/Aidesu",
+        "date": "2020",
+        "logo": "/projects/HomeAssistant/HomeAssistant.png",
+        "coop": false,
+        "img": [
+            {
+                "img_id": 0,
+                "img_link": "",
+                "img_alt": ""
+            }
+        ],
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "NodeJS"
+            }
+        ]
+    },
+    {
+        "id": 0,
+        "title": "TrueNAS LocalHost",
+        "comment": "Installation and configuration of a NAS server using TrueNAS for secure local data management.",
+        "content": "During this project, I learned how to use NodeJS and Express to develop a backend API, and how to make it communicate with a frontend built using React and Vite. I also worked with MongoDB to manage and store the application's data efficiently.",
+        "type": "personal",
+        "link": "https://github.com/Aidesu",
+        "date": "2023",
+        "logo": "/projects/Truenas/Truenas.png",
+        "coop": false,
+        "img": [
+            {
+                "img_id": 0,
+                "img_link": "",
+                "img_alt": ""
+            }
+        ],
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "NodeJS"
+            }
+        ]
+    },
+    {
+        "id": 0,
+        "title": "Proxmox Virtualization",
+        "comment": "Setup of a local Proxmox virtualization infrastructure with resource management and security via firewall and proxy.",
+        "content": "During this project, I learned how to use NodeJS and Express to develop a backend API, and how to make it communicate with a frontend built using React and Vite. I also worked with MongoDB to manage and store the application's data efficiently.",
+        "type": "personal",
+        "link": "https://github.com/Aidesu",
+        "date": "2023",
+        "logo": "/projects/Proxmox/Proxmox.png",
+        "coop": false,
+        "img": [
+            {
+                "img_id": 0,
+                "img_link": "",
+                "img_alt": ""
+            }
+        ],
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "NodeJS"
             }
         ]
     }
