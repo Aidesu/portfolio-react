@@ -95,7 +95,10 @@ export default function Projects() {
                                 <ol>
                                     <li>
                                         <h3>{p.title}</h3>
-                                        <p>{p.comment}</p>
+                                        <p id="projectsComment">{p.comment}</p>
+                                        <Link to={`/project/${k}`}>
+                                            <button>Learn more</button>
+                                        </Link>
                                     </li>
                                     <li>
                                         <p>{p.date}</p>

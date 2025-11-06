@@ -533,9 +533,54 @@ span {
 }
 
 #skillsSection h3 {
-    font-size: 2rem;
+    font-size: var(--subTitleSize);
 }
 
 #skillsSection p {
     font-size: 1.25rem;
+}
+
+#oneProjectMain h1 {
+    text-align: start;
+    margin-bottom: 0.5rem;
+}
+
+#oneProjectMain h2 {
+    margin-bottom: 1rem;
+}
+
+#oneProjectMain img {
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    border: solid var(--cardColor) 0.5rem;
+}
+
+#oneProjectMain svg {
+    width: 4rem;
+    height: 4rem;
+}
+
+#oneProjectMain section {
+    display: grid;
+    grid-template-columns: 65% 35%;
+    gap: 5rem;
+}
+
+#oneProjectMain ul {
+    list-style: none;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+#oneProjectMain button {
+    position: absolute;
+    top: 4.5rem;
+    left: 5%;
+    transform: translate(-5%);
+    font-size: var(--pSize);
+    padding: 0.5rem 0 0.5rem 0 !important;
+    width: 5rem;
 }

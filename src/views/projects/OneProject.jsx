@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import getProjects from "../../controller/getProjects";
 import { useParams } from "react-router";
+import { Icon } from "@iconify/react";
+import { Link } from "react-router";
 
 export default function OneProject() {
     const [projects, setProjects] = useState([]);
@@ -29,10 +31,46 @@ export default function OneProject() {
 
     return (
         <>
-            <main>
+            <main id="oneProjectMain">
+                <Link to={"/projects"}>
+                    <button>Back</button>
+                </Link>
                 {project ? (
                     <>
-                        <h1>{project.title}</h1>
+                        <section>
+                            <article>
+                                <h1>{project.title}</h1>
+                                <p>{project.comment}</p>
+                                {project.img ? (
+                                    <div>
+                                        <img
+                                            src={project.img[0].img_link}
+                                            alt={project.img[0].img_alt}
+                                        />
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+                            </article>
+                            <article>
+                                <h2>Stack</h2>
+                                <ul>
+                                    {project.techno
+                                        ? project.techno.map((t) => (
+                                              <li>
+                                                  <Icon
+                                                      icon={t.techno_name}
+                                                  ></Icon>
+                                              </li>
+                                          ))
+                                        : ""}
+                                </ul>
+                            </article>
+                        </section>
+                        <article>
+                            <h2>Comment</h2>
+                            <p>{project.content}</p>
+                        </article>
                     </>
                 ) : (
                     "Loading in progress..."

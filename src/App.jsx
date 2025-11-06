@@ -21,7 +21,6 @@ function App() {
                 <Route path="/skills" element={<Skills />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/project/:id" element={<OneProject />} />
-                <Route path="/project/:id" element={<OneProject />} />
                 <Route path="/*" element={<NotFound />}></Route>
             </Routes>
             <Footer />
