@@ -30,6 +30,7 @@ body {
 
 main {
     margin-top: 8rem;
+    min-height: 90vh;
 }
 
 header {
@@ -42,6 +43,8 @@ header {
     justify-content: space-between;
     width: 90%;
     height: 4rem;
+    background-color: rgba(0, 0, 0, 0.786);
+    z-index: 10;
 }
 
 header h1 {
@@ -60,6 +63,26 @@ header ol {
     gap: o;
     list-style: none;
     align-items: center;
+}
+
+footer {
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+footer a {
+    color: var(--firstText);
+}
+
+footer ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
 }
 
 a svg {
@@ -91,6 +114,11 @@ header a {
     transition: 0.2s;
     display: inline-block;
     font-weight: 200;
+}
+
+h1 span {
+    font-size: 2rem;
+    font-weight: 700;
 }
 
 a:hover {
@@ -150,7 +178,7 @@ span {
     display: flex;
     justify-content: space-between;
     position: relative;
-    align-items: center;
+    align-items: start;
 }
 
 #homeMain h1 {
@@ -172,7 +200,7 @@ span {
 
 #homeMain img {
     border-radius: 50%;
-    width: 30rem;
+    width: 25rem;
 }
 
 #aboutMain {
@@ -240,7 +268,7 @@ span {
 #projectsMain img {
     height: 70%;
     object-fit: contain;
-    padding: 2rem;
+    padding: 4rem 4rem 1rem 4rem;
     border-bottom: solid var(--secText) 2px;
 }
 
@@ -319,7 +347,7 @@ span {
     border: none;
     color: var(--firstText);
     border-radius: 10px;
-    font-size: 1rem;
+    font-size: 1.25rem;
     padding: 1rem;
 }
 

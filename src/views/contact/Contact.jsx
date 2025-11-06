@@ -42,7 +42,11 @@ export default function Contact() {
                     </li>
                     <li>
                         <label htmlFor="message">Your message : </label>
-                        <textarea name="message" required></textarea>
+                        <textarea
+                            name="message"
+                            placeholder="Enter your message here..."
+                            required
+                        ></textarea>
                     </li>
                 </ul>
                 <button type="submit">Send</button>

@@ -32,7 +32,7 @@
     {
         "name": "Git",
         "icon": "simple-icons:git",
-        "score": "85"
+        "score": "75"
     },
     {
         "name": "MySQL",
@@ -47,7 +47,7 @@
     {
         "name": "Javascript",
         "icon": "simple-icons:javascript",
-        "score": "75"
+        "score": "70"
     },
     {
         "name": "HTML5/CSS3",

@@ -1,6 +1,7 @@
-import { Route, Routes, Link } from "react-router";
+import { Route, Routes } from "react-router";
 import "./App.css";
 import Header from "./views/layouts/Header";
+import Footer from "./views/layouts/Footer";
 import HomeView from "./views/home/HomeView";
 import About from "./views/about/About";
 import Projects from "./views/projects/Projects";
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/project/:id" element={<OneProject />} />
                 <Route path="/*" element={<NotFound />}></Route>
             </Routes>
+            <Footer />
         </>
     );
 }

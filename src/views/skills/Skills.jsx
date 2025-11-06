@@ -16,7 +16,7 @@ export default function Skills() {
     return (
         <>
             <main>
-                <h1>Skills page</h1>
+                <h1>Skills</h1>
                 <section id="skillsSection">
                     <ul>
                         {skills

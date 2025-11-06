@@ -86,7 +86,7 @@ export default function Projects() {
     return (
         <>
             <main id="projectsMain">
-                <h1>Projects page</h1>
+                <h1>Projects</h1>
                 <section>
                     <ul>
                         {projects.map((p, k) => (
@@ -96,7 +96,6 @@ export default function Projects() {
                                     <li>
                                         <h3>{p.title}</h3>
                                         <p>{p.comment}</p>
-                                        <button>Learn more</button>
                                     </li>
                                     <li>
                                         <p>{p.date}</p>
