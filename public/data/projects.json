@@ -128,7 +128,7 @@
         "link": "https://github.com/Aidesu/Organix",
         "date": "2025-08-21",
         "logo": "/projects/Organix/Organix.png",
-        "coop": true,
+        "coop": false,
         "img": [
             {
                 "img_id": 0,

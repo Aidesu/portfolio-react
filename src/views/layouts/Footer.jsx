@@ -6,7 +6,7 @@ export default function Footer() {
             <footer>
                 <ul>
                     <li>
-                        <h3>© The Deafiaa Space Company. All right reserve</h3>
+                        <h3>© The Deafiaa Space Company. All right reserved</h3>
                     </li>
                 </ul>
                 <ul>

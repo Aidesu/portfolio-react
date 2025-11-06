@@ -2,7 +2,7 @@ export default function About() {
     return (
         <>
             <main id="aboutMain">
-                <h2>About me</h2>
+                <h1>About me</h1>
                 <p>
                     I am a Web and Mobile developer, specializing in front-end
                     (React, HTML, CSS, JavaScript) and back-end (Node.js, PHP,
