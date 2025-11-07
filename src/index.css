@@ -340,8 +340,9 @@ span {
 
 #projectsMain ul {
     display: grid;
-    grid-template-columns: 33% 33% 33%;
-    gap: 2rem;
+    grid-template-columns: 30% 30% 30%;
+    justify-content: center;
+    gap: 3%;
 }
 
 #projectsMain li {
@@ -402,7 +403,7 @@ span {
     margin: 10% auto;
     width: 50%;
     gap: 4rem;
-    padding: 6rem 6rem 0 6rem;
+    padding: 6rem 4rem 0 3rem;
     border-radius: 15px;
     background-color: var(--cardColor);
     position: relative;
@@ -540,6 +541,13 @@ span {
     font-size: 1.25rem;
 }
 
+#oneProjectMain {
+    margin-top: 12rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 #oneProjectMain h1 {
     text-align: start;
     margin-bottom: 0.5rem;
@@ -575,12 +583,18 @@ span {
     grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
-#oneProjectMain button {
+#backBtn {
     position: absolute;
-    top: 4.5rem;
+    top: 6rem;
     left: 5%;
     transform: translate(-5%);
-    font-size: var(--pSize);
+    font-size: var(--aSize) !important;
     padding: 0.5rem 0 0.5rem 0 !important;
     width: 5rem;
+}
+
+#oneProjectMain article {
+    background-color: var(--cardColor);
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
 }

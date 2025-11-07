@@ -31,10 +31,10 @@ export default function OneProject() {
 
     return (
         <>
+            <Link to={"/projects"}>
+                <button id="backBtn">Back</button>
+            </Link>
             <main id="oneProjectMain">
-                <Link to={"/projects"}>
-                    <button>Back</button>
-                </Link>
                 {project ? (
                     <>
                         <section>
@@ -67,10 +67,12 @@ export default function OneProject() {
                                 </ul>
                             </article>
                         </section>
-                        <article>
-                            <h2>Comment</h2>
-                            <p>{project.content}</p>
-                        </article>
+                        <section>
+                            <article>
+                                <h2>Comment</h2>
+                                <p>{project.content}</p>
+                            </article>
+                        </section>
                     </>
                 ) : (
                     "Loading in progress..."

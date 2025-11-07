@@ -9,11 +9,13 @@ import Skills from "./views/skills/Skills";
 import Contact from "./views/contact/Contact";
 import OneProject from "./views/projects/OneProject";
 import NotFound from "./views/notFound/notFound";
+import ScrollTop from "./components/ScrollTop";
 
 function App() {
     return (
         <>
             <Header />
+            <ScrollTop />
             <Routes>
                 <Route path="/" element={<HomeView />} />
                 <Route path="/about" element={<About />} />

@@ -67,7 +67,7 @@
         "id": 2,
         "title": "Sanctum Faunae",
         "comment": "M12 - Symfony Evaluation Website for an animal shelter",
-        "content": "In this project, we worked together to develop a monolithic application using Symfony with a MongoDB database. The main focus was on learning and gaining hands-on experience with backend development, database management, and application architecture.",
+        "content": "In this project, we worked together to develop a monolithic application using Symfony with a MySQL database. The main focus was on learning and gaining hands-on experience with backend development, database management, and application architecture.",
         "type": "academic",
         "link": "https://github.com/Aidesu/brigitte-bdd",
         "date": "2025-10-16",
@@ -87,7 +87,7 @@
             },
             {
                 "techno_id": 1,
-                "techno_name": "simple-icons:mongodb"
+                "techno_name": "simple-icons:mysql"
             }
         ]
     },
@@ -160,7 +160,12 @@
                 "img_alt": "Home assistant dashboard"
             }
         ],
-        "techno": []
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "simple-icons:homeassistant"
+            }
+        ]
     },
     {
         "id": 6,
@@ -179,7 +184,12 @@
                 "img_alt": ""
             }
         ],
-        "techno": []
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "simple-icons:truenas"
+            }
+        ]
     },
     {
         "id": 7,
@@ -201,7 +211,7 @@
         "techno": [
             {
                 "techno_id": 0,
-                "techno_name": "NodeJS"
+                "techno_name": "simple-icons:proxmox"
             }
         ]
     }
