@@ -3,7 +3,7 @@ export default function HomeView() {
         <>
             <main id="homeMain">
                 <section>
-                    <div>
+                    <div className="animSlideL">
                         <h3>
                             <span>Web</span> Developer
                         </h3>
@@ -16,7 +16,7 @@ export default function HomeView() {
                             opportunities.
                         </p>
                     </div>
-                    <div>
+                    <div className="animSlideR">
                         <img src="/pfpCarla.jpg" alt="Carla profile pic" />
                     </div>
                 </section>

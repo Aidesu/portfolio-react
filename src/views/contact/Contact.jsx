@@ -19,7 +19,7 @@ export default function Contact() {
 
     return (
         <main className="mainContact">
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className="animSlideBF">
                 <h3>Contact me</h3>
                 <ul>
                     <li>

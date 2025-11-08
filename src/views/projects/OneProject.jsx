@@ -38,7 +38,7 @@ export default function OneProject() {
                 {project ? (
                     <>
                         <section>
-                            <article>
+                            <article className="animSlideL">
                                 <h1>{project.title}</h1>
                                 <p>{project.comment}</p>
                                 {project.img ? (
@@ -52,7 +52,7 @@ export default function OneProject() {
                                     ""
                                 )}
                             </article>
-                            <article>
+                            <article className="animSlideR">
                                 <h2>Stack</h2>
                                 <ul>
                                     {project.techno
@@ -68,7 +68,7 @@ export default function OneProject() {
                             </article>
                         </section>
                         <section>
-                            <article>
+                            <article className="animSlideB">
                                 <h2>Comment</h2>
                                 <p>{project.content}</p>
                             </article>

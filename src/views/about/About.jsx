@@ -3,7 +3,7 @@ export default function About() {
         <>
             <main id="aboutMain">
                 <h1>About me</h1>
-                <p>
+                <p className="animSlideBF">
                     I am a Web and Mobile developer, specializing in front-end
                     (React, HTML, CSS, JavaScript) and back-end (Node.js, PHP,
                     Symfony, SQL/NoSQL). <br />
