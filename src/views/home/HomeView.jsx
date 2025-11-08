@@ -16,7 +16,7 @@ export default function HomeView() {
                             opportunities.
                         </p>
                     </div>
-                    <div className="animSlideR">
+                    <div>
                         <img src="/pfpCarla.jpg" alt="Carla profile pic" />
                     </div>
                 </section>
