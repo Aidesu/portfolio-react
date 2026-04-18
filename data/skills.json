@@ -27,7 +27,7 @@
     {
         "name": "Flutter",
         "icon": "simple-icons:flutter",
-        "score": "0"
+        "score": "60"
     },
     {
         "name": "Git",
@@ -62,7 +62,7 @@
     {
         "name": "DART",
         "icon": "simple-icons:dart",
-        "score": "0"
+        "score": "60"
     },
     {
         "name": "Ollama",
