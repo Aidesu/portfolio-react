@@ -41,16 +41,16 @@ export default function OneProject() {
                             <article className="animSlideL">
                                 <h1>{project.title}</h1>
                                 <p>{project.comment}</p>
-                                {project.img ? (
-                                    <div>
-                                        <img
-                                            src={project.img[0].img_link}
-                                            alt={project.img[0].img_alt}
-                                        />
-                                    </div>
-                                ) : (
-                                    ""
-                                )}
+                                {project.img
+                                    ? project.img.map((i) => (
+                                          <img
+                                              id={i.img_id}
+                                              src={i.img_link}
+                                              alt={i.img_alt}
+                                              loading="lazy"
+                                          />
+                                      ))
+                                    : ""}
                             </article>
                             <article className="animSlideR">
                                 <h2>Stack</h2>
@@ -65,10 +65,7 @@ export default function OneProject() {
                                           ))
                                         : ""}
                                 </ul>
-                            </article>
-                        </section>
-                        <section>
-                            <article className="animSlideB">
+                                <hr />
                                 <h2>Comment</h2>
                                 <p>{project.content}</p>
                             </article>

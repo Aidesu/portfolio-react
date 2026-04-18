@@ -4,6 +4,7 @@ import { Link } from "react-router";
 
 export default function Projects() {
     const [projects, setProjects] = useState([]);
+    const [sortBy, setSortBy] = useState("default");
 
     useEffect(() => {
         async function fetchData() {
@@ -12,6 +13,33 @@ export default function Projects() {
         }
         fetchData();
     }, []);
+
+    function getSortedProject() {
+        switch (sortBy) {
+            // case "reversed":
+            //     return [...projects].reverse();
+            case "date-asc":
+                return [...projects].sort((a, b) =>
+                    a.date.localeCompare(b.date),
+                );
+            case "alpha-asc":
+                return [...projects].sort((a, b) =>
+                    a.title.localeCompare(b.title, undefined, {
+                        sensitivity: "base",
+                    }),
+                );
+            case "alpha-desc":
+                return [...projects].sort((a, b) =>
+                    b.title.localeCompare(a.title, undefined, {
+                        sensitivity: "base",
+                    }),
+                );
+            default:
+                return [...projects].sort((a, b) =>
+                    b.date.localeCompare(a.date),
+                );
+        }
+    }
 
     function typeSvg(type) {
         switch (type) {
@@ -87,16 +115,35 @@ export default function Projects() {
         <>
             <main id="projectsMain">
                 <h1>Projects</h1>
+                {/* Button for sorting Projects */}
+                {/* <div>
+                    <button onClick={() => setSortBy("default")}>
+                        Par défaut
+                    </button>
+                    <button onClick={() => setSortBy("alpha-asc")}>test</button>
+                    <button onClick={() => setSortBy("alpha-desc")}>
+                        test
+                    </button>
+                    <button onClick={() => setSortBy("date-desc")}>
+                        Plus récent
+                    </button>
+                    <button onClick={() => setSortBy("date-asc")}>
+                        Plus ancien
+                    </button>
+                    <button onClick={() => setSortBy("reversed")}>
+                        revers
+                    </button>
+                </div> */}
                 <section className="animSlideBF">
                     <ul>
-                        {projects.map((p, k) => (
+                        {getSortedProject().map((p, k) => (
                             <li id={`projectCard${k}`}>
                                 <img src={p.logo} alt="" />
                                 <ol>
                                     <li>
                                         <h3>{p.title}</h3>
                                         <p id="projectsComment">{p.comment}</p>
-                                        <Link to={`/project/${k}`}>
+                                        <Link to={`/project/${p.id}`}>
                                             <button>Learn more</button>
                                         </Link>
                                     </li>
