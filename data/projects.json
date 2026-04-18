@@ -48,8 +48,13 @@
         "img": [
             {
                 "img_id": 0,
-                "img_link": "",
-                "img_alt": ""
+                "img_link": "/projects/MyTasksSecure/img/MyTasksSecureLanding.png",
+                "img_alt": "Landing page My Tasks Secure"
+            },
+            {
+                "img_id": 1,
+                "img_link": "/projects/MyTasksSecure/img/MyTasksSecureLogin.png",
+                "img_alt": "Login page My Tasks Secure"
             }
         ],
         "techno": [
@@ -212,6 +217,124 @@
             {
                 "techno_id": 0,
                 "techno_name": "simple-icons:proxmox"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "title": "Psylethia",
+        "comment": "Flutter E-commerce front-end (Amazon-like) focusing on UI/UX and navigation without backend.",
+        "content": "During this project, I learned how to use Flutter to develop a mobile front-end application for an e-commerce platform similar to Amazon. I focused on building a responsive and intuitive user interface, managing navigation between pages, and implementing core UI components such as product listings, product details, shopping cart, and checkout screens. I also improved my understanding of state management in Flutter to ensure a smooth and dynamic user experience.",
+        "type": "academic",
+        "link": "https://github.com/Aidesu/Psylethia",
+        "date": "2025-11-21",
+        "logo": "/projects/Psylethia/PsylethiaLogo.png",
+        "coop": true,
+        "img": [
+            {
+                "img_id": 0,
+                "img_link": "",
+                "img_alt": ""
+            }
+        ],
+        "techno": [
+            {
+                "techno_id": 2,
+                "techno_name": "simple-icons:flutter"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "title": "TDS Company",
+        "comment": "React front-end project (first experience) based on a designed mockup, focused on building a simple interface using basic components.",
+        "content": "During this project, I built a first front-end application using React + Vite as an introductory exercise. The goal was to reproduce a given mockup by creating a simple and functional interface. I worked on building components and structuring the page according to the provided layout. This project helped me learn the basics of React and understand how a front-end application is structured.The project was completed in 2 hours as part of an evaluation.",
+        "type": "academic",
+        "link": "https://github.com/Aidesu/tds-company-react",
+        "date": "2025-09-10",
+        "logo": "/projects/TdsCompany/TdsCompanyLogo.png",
+        "coop": false,
+        "img": [
+            {
+                "img_id": 0,
+                "img_link": "/projects/TdsCompany/img/TdsCLanding.png",
+                "img_alt": "Landing page TDS Company"
+            },
+            {
+                "img_id": 1,
+                "img_link": "/projects/TdsCompany/img/TdsCContact.png",
+                "img_alt": "Contact page TDS Company"
+            },
+            {
+                "img_id": 2,
+                "img_link": "/projects/TdsCompany/img/TdsCTerms.png",
+                "img_alt": "Terms page TDS Company"
+            }
+        ],
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "simple-icons:react"
+            },
+            {
+                "techno_id": 1,
+                "techno_name": "simple-icons:vite"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "title": "Site Vitrine Docker",
+        "comment": "",
+        "content": "",
+        "type": "academic",
+        "link": "https://github.com/Aidesu/siteVitrineDocker",
+        "date": "2025-07-01",
+        "logo": "/projects/SiteVitrineDocker/SiteVitrineDockerLogo.webp",
+        "coop": false,
+        "img": [
+            {
+                "img_id": 0,
+                "img_link": "/projects/SiteVitrineDocker/img/SiteVitrineDocker.png",
+                "img_alt": "Landing page TDS Company"
+            }
+        ],
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "simple-icons:html5"
+            },
+            {
+                "techno_id": 1,
+                "techno_name": "simple-icons:css3"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "title": "Shadow Market",
+        "comment": "",
+        "content": "",
+        "type": "academic",
+        "link": "https://github.com/Aidesu/siteVitrineDocker",
+        "date": "2025-08-22",
+        "logo": "/projects/ShadowMarket/ShadowMarketLogo.png",
+        "coop": false,
+        "img": [
+            {
+                "img_id": 0,
+                "img_link": "/projects/ShadowMarket/img/ShadowMarketLanding.png",
+                "img_alt": "Landing page Shadow Market"
+            }
+        ],
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "simple-icons:html5"
+            },
+            {
+                "techno_id": 1,
+                "techno_name": "simple-icons:css3"
             }
         ]
     }
