@@ -663,3 +663,54 @@ span {
     animation: slideFromBottom 0.4s ease-out forwards;
     position: relative;
 }
+
+/* 1. Le conteneur qui aligne les boutons proprement */
+.sortingProjectDiv {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne sur mobile */
+    gap: 12px; /* Espace entre les boutons */
+    margin: 20px 0; /* Espace au dessus et en dessous du bloc */
+    padding: 10px 0;
+}
+
+.sort-btn {
+    /* On réinitialise les styles par défaut */
+    appearance: none;
+    outline: none;
+
+    /* Dimensions et alignement */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px; /* Carré pour les icônes */
+    height: 45px;
+
+    /* Bordures et Couleurs */
+    background-color: transparent;
+    border: 2px solid var(--accentColor);
+    color: var(--accentColor);
+    border-radius: 10px; /* Coins arrondis */
+
+    /* Curseur et transition */
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    font-size: 1.1rem;
+}
+
+.sort-btn:hover {
+    background-color: var(--accentColor);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sort-btn.active {
+    background-color: var(--accentColor);
+    color: #ffffff;
+    border-color: var(--accentColor);
+    transform: scale(1.05);
+}
+
+.sort-btn:active {
+    transform: scale(0.95);
+}

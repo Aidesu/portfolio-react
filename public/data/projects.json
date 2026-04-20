@@ -12,8 +12,23 @@
         "img": [
             {
                 "img_id": 0,
-                "img_link": "/projects/TechMatrix/img/TechMatrixHome.png",
+                "img_link": "/projects/TechMatrix/img/TechMatrixLanding.png",
+                "img_alt": "TechMatrix Landing Page"
+            },
+            {
+                "img_id": 1,
+                "img_link": "/projects/TechMatrix/img/TechMatrixCat.png",
+                "img_alt": "TechMatrix Category Page"
+            },
+            {
+                "img_id": 2,
+                "img_link": "/projects/TechMatrix/img/TechMatrixAbout.png",
                 "img_alt": "TechMatrix About Page"
+            },
+            {
+                "img_id": 3,
+                "img_link": "/projects/TechMatrix/img/TechMatrix404.png",
+                "img_alt": "TechMatrix 404 Page"
             }
         ],
         "techno": [
@@ -233,8 +248,8 @@
         "img": [
             {
                 "img_id": 0,
-                "img_link": "",
-                "img_alt": ""
+                "img_link": "/projects/Psylethia/img/PsylethiaImg.png",
+                "img_alt": "3 pages of Psylethia web app mobile"
             }
         ],
         "techno": [
@@ -319,7 +334,7 @@
         "link": "https://github.com/Aidesu/siteVitrineDocker",
         "date": "2025-08-22",
         "logo": "/projects/ShadowMarket/ShadowMarketLogo.png",
-        "coop": false,
+        "coop": true,
         "img": [
             {
                 "img_id": 0,

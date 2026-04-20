@@ -1,10 +1,17 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faArrowDownAZ,
+    faArrowDownZA,
+    faArrowDownShortWide,
+    faArrowDownWideShort,
+} from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import getProjects from "../../controller/getProjects";
 import { Link } from "react-router";
 
 export default function Projects() {
     const [projects, setProjects] = useState([]);
-    const [sortBy, setSortBy] = useState("default");
+    const [sortBy, setSortBy] = useState("date-desc");
 
     useEffect(() => {
         async function fetchData() {
@@ -15,27 +22,31 @@ export default function Projects() {
     }, []);
 
     function getSortedProject() {
+        const projectsCopy = [...projects];
+
         switch (sortBy) {
-            // case "reversed":
-            //     return [...projects].reverse();
             case "date-asc":
-                return [...projects].sort((a, b) =>
+                return projectsCopy.sort((a, b) =>
                     a.date.localeCompare(b.date),
                 );
+            case "date-desc":
+                return projectsCopy.sort((a, b) =>
+                    b.date.localeCompare(a.date),
+                );
             case "alpha-asc":
-                return [...projects].sort((a, b) =>
+                return projectsCopy.sort((a, b) =>
                     a.title.localeCompare(b.title, undefined, {
                         sensitivity: "base",
                     }),
                 );
             case "alpha-desc":
-                return [...projects].sort((a, b) =>
+                return projectsCopy.sort((a, b) =>
                     b.title.localeCompare(a.title, undefined, {
                         sensitivity: "base",
                     }),
                 );
             default:
-                return [...projects].sort((a, b) =>
+                return projectsCopy.sort((a, b) =>
                     b.date.localeCompare(a.date),
                 );
         }
@@ -111,29 +122,52 @@ export default function Projects() {
         }
     }
 
+    const toggleAlphaSort = () => {
+        setSortBy((prev) =>
+            prev === "alpha-asc" ? "alpha-desc" : "alpha-asc",
+        );
+    };
+
+    const toggleDateSort = () => {
+        setSortBy((prev) => (prev === "date-desc" ? "date-asc" : "date-desc"));
+    };
+
     return (
         <>
             <main id="projectsMain">
                 <h1>Projects</h1>
-                {/* Button for sorting Projects */}
-                {/* <div>
-                    <button onClick={() => setSortBy("default")}>
-                        Par défaut
+
+                <div className="sortingProjectDiv">
+                    {/* Bouton Switch Alphabet */}
+                    <button
+                        className={`sort-btn ${sortBy.includes("alpha") ? "active" : ""}`}
+                        onClick={toggleAlphaSort}
+                        title="Trier par Nom (A-Z / Z-A)"
+                    >
+                        <FontAwesomeIcon
+                            icon={
+                                sortBy === "alpha-asc"
+                                    ? faArrowDownAZ
+                                    : faArrowDownZA
+                            }
+                        />
                     </button>
-                    <button onClick={() => setSortBy("alpha-asc")}>test</button>
-                    <button onClick={() => setSortBy("alpha-desc")}>
-                        test
+
+                    {/* Bouton Switch Date */}
+                    <button
+                        className={`sort-btn ${sortBy.includes("date") ? "active" : ""}`}
+                        onClick={toggleDateSort}
+                        title="Trier par Date (Récent / Ancien)"
+                    >
+                        <FontAwesomeIcon
+                            icon={
+                                sortBy === "date-desc"
+                                    ? faArrowDownWideShort
+                                    : faArrowDownShortWide
+                            }
+                        />
                     </button>
-                    <button onClick={() => setSortBy("date-desc")}>
-                        Plus récent
-                    </button>
-                    <button onClick={() => setSortBy("date-asc")}>
-                        Plus ancien
-                    </button>
-                    <button onClick={() => setSortBy("reversed")}>
-                        revers
-                    </button>
-                </div> */}
+                </div>
                 <section className="animSlideBF">
                     <ul>
                         {getSortedProject().map((p, k) => (
