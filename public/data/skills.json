@@ -1,72 +1,156 @@
 [
     {
-        "name": "Symfony",
-        "icon": "simple-icons:symfony",
-        "score": "60"
+        "name": "HTML5/CSS3",
+        "icon": "simple-icons:html5",
+        "score": "90",
+        "category": "frontend",
+        "color": "#E34F26"
     },
     {
         "name": "REACT",
         "icon": "simple-icons:react",
-        "score": "70"
-    },
-    {
-        "name": "Docker",
-        "icon": "simple-icons:docker",
-        "score": "40"
-    },
-    {
-        "name": "PHPmyadmin",
-        "icon": "simple-icons:phpmyadmin",
-        "score": "50"
-    },
-    {
-        "name": "Node.JS",
-        "icon": "mdi:nodejs",
-        "score": "60"
-    },
-    {
-        "name": "Flutter",
-        "icon": "simple-icons:flutter",
-        "score": "60"
-    },
-    {
-        "name": "Git",
-        "icon": "simple-icons:git",
-        "score": "75"
-    },
-    {
-        "name": "MySQL",
-        "icon": "simple-icons:mysql",
-        "score": "70"
-    },
-    {
-        "name": "MongoDB",
-        "icon": "simple-icons:mongodb",
-        "score": "70"
+        "score": "70",
+        "category": "frontend",
+        "color": "#61DAFB"
     },
     {
         "name": "Javascript",
         "icon": "simple-icons:javascript",
-        "score": "70"
+        "score": "70",
+        "category": "frontend",
+        "color": "#F7DF1E"
     },
     {
-        "name": "HTML5/CSS3",
-        "icon": "simple-icons:html5",
-        "score": "90"
+        "name": "Next.js",
+        "icon": "simple-icons:nextdotjs",
+        "score": "65",
+        "category": "frontend",
+        "color": "#FFFFFF"
+    },
+    {
+        "name": "Vite",
+        "icon": "simple-icons:vite",
+        "score": "60",
+        "category": "frontend",
+        "color": "#646CFF"
+    },
+    {
+        "name": "Nuxt",
+        "icon": "simple-icons:nuxt",
+        "score": "55",
+        "category": "frontend",
+        "color": "#00DC82"
+    },
+    {
+        "name": "Astro",
+        "icon": "simple-icons:astro",
+        "score": "50",
+        "category": "frontend",
+        "color": "#BC52EE"
+    },
+    {
+        "name": "Symfony",
+        "icon": "simple-icons:symfony",
+        "score": "60",
+        "category": "backend",
+        "color": "#FFFFFF"
+    },
+    {
+        "name": "Node.JS",
+        "icon": "mdi:nodejs",
+        "score": "60",
+        "category": "backend",
+        "color": "#5FA04E"
     },
     {
         "name": "PHP",
         "icon": "simple-icons:php",
-        "score": "60"
+        "score": "60",
+        "category": "backend",
+        "color": "#8892BF"
+    },
+    {
+        "name": "Express",
+        "icon": "simple-icons:express",
+        "score": "55",
+        "category": "backend",
+        "color": "#FFFFFF"
+    },
+    {
+        "name": "Fastify",
+        "icon": "simple-icons:fastify",
+        "score": "50",
+        "category": "backend",
+        "color": "#FFFFFF"
+    },
+    {
+        "name": "Flutter",
+        "icon": "simple-icons:flutter",
+        "score": "60",
+        "category": "mobile",
+        "color": "#54C5F8"
     },
     {
         "name": "DART",
         "icon": "simple-icons:dart",
-        "score": "60"
+        "score": "60",
+        "category": "mobile",
+        "color": "#40C4FF"
+    },
+    {
+        "name": "MySQL",
+        "icon": "simple-icons:mysql",
+        "score": "70",
+        "category": "database",
+        "color": "#00A3E0"
+    },
+    {
+        "name": "MongoDB",
+        "icon": "simple-icons:mongodb",
+        "score": "70",
+        "category": "database",
+        "color": "#47A248"
+    },
+    {
+        "name": "PostgreSQL",
+        "icon": "simple-icons:postgresql",
+        "score": "60",
+        "category": "database",
+        "color": "#4169E1"
+    },
+    {
+        "name": "Supabase",
+        "icon": "simple-icons:supabase",
+        "score": "55",
+        "category": "database",
+        "color": "#3ECF8E"
+    },
+    {
+        "name": "PHPmyadmin",
+        "icon": "simple-icons:phpmyadmin",
+        "score": "50",
+        "category": "database",
+        "color": "#8B93C4"
+    },
+    {
+        "name": "Git",
+        "icon": "simple-icons:git",
+        "score": "75",
+        "category": "devops",
+        "color": "#F05032"
     },
     {
         "name": "Ollama",
         "icon": "simple-icons:ollama",
-        "score": "60"
+        "score": "60",
+        "category": "devops",
+        "color": "#FFFFFF"
+    },
+    {
+        "name": "Docker",
+        "icon": "simple-icons:docker",
+        "score": "40",
+        "category": "devops",
+        "color": "#2496ED"
     }
 ]

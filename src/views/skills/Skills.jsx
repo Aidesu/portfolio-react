@@ -2,6 +2,17 @@ import getSkills from "../../controller/getSkills";
 import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 
+// Preferred display order + labels for the known stack layers.
+// Any extra category found in skills.json is appended automatically,
+// so new categories can be added in the data without touching this file.
+const CATEGORY_ORDER = [
+    { key: "frontend", label: "frontend" },
+    { key: "backend", label: "backend" },
+    { key: "mobile", label: "mobile" },
+    { key: "database", label: "database" },
+    { key: "devops", label: "devops" },
+];
+
 export default function Skills() {
     const [skills, setSkills] = useState([]);
 
@@ -13,38 +24,60 @@ export default function Skills() {
         fetchData();
     }, []);
 
-    return (
-        <>
-            <main>
-                <h1>Skills</h1>
-                <section id="skillsSection">
-                    <ul>
-                        {skills
-                            ? skills.map((s) => {
-                                  return (
-                                      <li key={s.name}>
-                                          <Icon icon={s.icon} color="white" />
+    // Known layers first, then any other category present in the data.
+    const knownKeys = CATEGORY_ORDER.map((c) => c.key);
+    const extraCats = [...new Set(skills.map((s) => s.category))]
+        .filter((k) => k && !knownKeys.includes(k))
+        .map((k) => ({ key: k, label: k }));
 
-                                          <article>
-                                              <h3>{s.name}</h3>
-                                              <div className="skillExperience">
-                                                  <span>Experience :</span>
-                                                  <div className="progressBarSkills">
-                                                      <div
-                                                          style={{
-                                                              width: `${s.score}%`,
-                                                          }}
-                                                      ></div>
-                                                  </div>
-                                              </div>
-                                          </article>
-                                      </li>
-                                  );
-                              })
-                            : ""}
-                    </ul>
-                </section>
-            </main>
-        </>
+    // Build the panels, dropping empty layers.
+    // `score` is never shown — it only ranks skills within a layer.
+    const groups = [...CATEGORY_ORDER, ...extraCats]
+        .map((cat) => ({
+            ...cat,
+            items: skills
+                .filter((s) => s.category === cat.key)
+                .sort((a, b) => Number(b.score) - Number(a.score)),
+        }))
+        .filter((g) => g.items.length);
+
+    return (
+        <main id="skillsMain">
+            <div className="skillsHero">
+                <h1 className="skillsTitle">Skills</h1>
+                <p className="skillsLede">
+                    From the interface down to the server it runs on.
+                </p>
+            </div>
+
+            <div className="skillsBento">
+                {groups.map((g) => (
+                    <section key={g.key} className="skillPanel">
+                        <div className="skillPanelHead">
+                            <span className="skillPanelPath">{g.label}</span>
+                            <span className="skillPanelCount">
+                                {String(g.items.length).padStart(2, "0")}
+                            </span>
+                        </div>
+                        <ul className="skillPanelList">
+                            {g.items.map((s) => (
+                                <li
+                                    key={s.name}
+                                    className="skillItem"
+                                    style={{ "--c": s.color }}
+                                >
+                                    <span className="skillItemIcon">
+                                        <Icon icon={s.icon} />
+                                    </span>
+                                    <span className="skillItemName">
+                                        {s.name}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                ))}
+            </div>
+        </main>
     );
 }
