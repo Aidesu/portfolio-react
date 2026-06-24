@@ -28,9 +28,6 @@
         grid-template-columns: 50% 50% !important;
         gap: 1rem !important;
     }
-    #skillsSection ul {
-        grid-template-columns: 80% !important;
-    }
     #homeMain img {
         position: absolute;
         top: -9rem;
@@ -137,6 +134,10 @@ main {
 
 main h1 {
     text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em; /* balance the trailing letter-spacing when centred */
+    font-weight: 700;
 }
 
 header {
@@ -308,6 +309,7 @@ span {
     font-size: var(--titleSize);
     margin: 0.5rem 0;
     text-align: start;
+    text-indent: 0; /* left-aligned: no centring compensation needed */
 }
 
 #homeMain h3 {
@@ -580,72 +582,123 @@ span {
     padding: 1rem;
 }
 
-#skillsSection {
-    margin-top: 2rem;
+/* ===== Skills ===== */
+#skillsMain {
+    max-width: 1100px;
+    margin-top: 8rem; /* match other pages' title position (no eye jump) */
+    margin-bottom: 4rem;
 }
 
-#skillsSection ul {
-    display: grid;
-    grid-template-columns: 35% 35%;
-    gap: 1rem;
-    width: 100%;
+/* --- Hero (compact) --- */
+.skillsHero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.skillsTitle {
+    /* size matched to About/Projects; uppercase + spacing inherited from main h1 */
+    font-size: 2rem;
+    margin-bottom: 0.85rem;
+}
+
+.skillsLede {
+    color: var(--secText);
+    font-size: var(--pSize);
+    font-weight: 200;
+    line-height: 1.6;
+    max-width: 48ch;
+    margin: 0 auto;
+}
+
+/* --- Bento of layer panels (fully static) --- */
+.skillsBento {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    list-style: none;
+    gap: 1.25rem;
 }
 
-#skillsSection li {
+.skillPanel {
+    box-sizing: border-box;
+    flex: 1 1 460px;
+    max-width: 540px;
     background-color: var(--cardColor);
-    height: 10rem;
-    border-radius: 10px;
+    border: 1px solid var(--highColor);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.skillPanelHead {
     display: flex;
-    align-items: center;
-    gap: 2rem;
-    animation: slideFromBottom 0.6s ease-out forwards;
-}
-
-.skillExperience {
-    display: flex;
-    gap: 1rem;
-    align-items: start;
-    width: 100%;
-    flex-direction: column;
-    font-size: 1.25rem;
-}
-
-.progressBarSkills div {
-    background-color: var(--accentColor);
-    display: block;
-    height: 100%;
-    border-radius: 15px;
-}
-
-.progressBarSkills {
-    background-color: var(--bgColor);
-    display: block;
-    height: 1rem;
-    width: 40%;
-    border-radius: 15px;
-}
-
-#skillsSection svg {
-    width: 7rem;
-    height: 7rem;
-    fill: white;
-    margin-left: 1rem;
-}
-
-#skillsSection article {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
+    align-items: baseline;
     justify-content: space-between;
     gap: 1rem;
-    height: 70%;
+    padding-bottom: 0.9rem;
+    margin-bottom: 1.1rem;
+    border-bottom: 1px solid var(--highColor);
 }
 
-#skillsSection h3 {
-    font-size: var(--subTitleSize);
+.skillPanelPath {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    color: var(--firstText);
+    font-size: 1rem;
+}
+
+.skillPanelPath::before {
+    content: "~/";
+    color: var(--accentColor);
+}
+
+.skillPanelCount {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    color: var(--accentColor2);
+    font-size: 0.85rem;
+}
+
+/* Skills as a wrapping, colour-coded chip cloud — holds any number of stacks */
+.skillPanelList {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 0.6rem;
+}
+
+.skillItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    /* fallbacks first, brand-tinted (var --c) where color-mix is supported */
+    background: var(--highColor);
+    background: color-mix(in srgb, var(--c, var(--firstText)) 13%, transparent);
+    border: 1px solid var(--highColor);
+    border: 1px solid
+        color-mix(in srgb, var(--c, var(--firstText)) 34%, transparent);
+}
+
+.skillItemIcon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: var(--c, var(--firstText));
+}
+
+.skillItemIcon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.skillItemName {
+    color: var(--firstText);
+    font-size: 0.95rem;
+}
+
+@media screen and (width <= 768px) {
+    .skillPanel {
+        flex-basis: 100%;
+    }
 }
 
 #oneProjectMain {
@@ -657,6 +710,7 @@ span {
 
 #oneProjectMain h1 {
     text-align: start;
+    text-indent: 0; /* left-aligned: no centring compensation needed */
     margin-bottom: 0.5rem;
 }
 
