@@ -200,7 +200,7 @@ footer ul {
 }
 
 footer h3 {
-    font-size: var(--pSize);
+    font-size: 12px;
 }
 
 a svg {
@@ -339,7 +339,7 @@ span {
 }
 
 #aboutMain p {
-    text-align: center;
+    text-align: start;
     width: 80%;
     color: var(--secText);
     font-size: var(--pSize);
@@ -367,7 +367,8 @@ span {
     display: flex;
     justify-content: space-between;
     text-align: start;
-    height: 30%;
+    gap: 1rem;
+    margin-top: auto;
 }
 
 #projectsMain ol li {
@@ -380,15 +381,12 @@ span {
 #projectsMain ol li:nth-child(2) {
     text-align: end;
     display: flex;
-    width: 60%;
+    flex-shrink: 0;
+    width: 40%;
 }
 
 #projectsMain h3 {
     font-size: 1.5rem;
-}
-
-#projectsMain button {
-    font-size: 1.25rem;
 }
 
 #projectsMain p {
@@ -397,9 +395,9 @@ span {
 }
 
 #projectsMain img {
-    height: 70%;
+    height: 14rem;
     object-fit: contain;
-    padding: 4rem 4rem 1rem 4rem;
+    padding: 3rem 4rem 1rem 4rem;
     border-bottom: solid var(--secText) 2px;
 }
 
@@ -407,6 +405,100 @@ span {
     display: flex;
     gap: 1rem;
     justify-content: end;
+}
+
+/* ---- Project card: clickable card + animated gradient border ---- */
+.projectCard {
+    position: relative;
+    background-color: var(--bgColor);
+    border: 1px solid var(--highColor);
+    border-radius: 15px;
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+/* Rotating conic-gradient border, revealed on hover */
+.projectCard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(
+        from var(--borderAngle, 0deg),
+        var(--accentColor),
+        var(--accentColor2),
+        var(--accentColor)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.projectCard:hover {
+    transform: translateY(-8px);
+    border-color: transparent;
+    box-shadow: 0 14px 32px -10px hsla(306, 57%, 61%, 0.5);
+}
+
+.projectCard:hover::before {
+    opacity: 1;
+    animation: borderRotate 3s linear infinite;
+}
+
+/* Title link stretched to make the whole card clickable */
+.projectCardLink {
+    color: var(--firstText);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.projectCardLink::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.projectCard:hover .projectCardLink {
+    background: linear-gradient(
+        90deg,
+        var(--accentColor),
+        var(--accentColor2)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Keep the GitHub link clickable above the stretched card link */
+.projectGithubLink {
+    position: relative;
+    z-index: 2;
+}
+
+@property --borderAngle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes borderRotate {
+    to {
+        --borderAngle: 360deg;
+    }
 }
 
 .mainContact form {
@@ -506,22 +598,23 @@ span {
     animation: slideFromBottom 0.6s ease-out forwards;
 }
 
-#skillsSection p {
+.skillExperience {
     display: flex;
     gap: 1rem;
     align-items: start;
     width: 100%;
     flex-direction: column;
+    font-size: 1.25rem;
 }
 
-#progressBarSkills div {
+.progressBarSkills div {
     background-color: var(--accentColor);
     display: block;
     height: 100%;
     border-radius: 15px;
 }
 
-#progressBarSkills {
+.progressBarSkills {
     background-color: var(--bgColor);
     display: block;
     height: 1rem;
@@ -548,10 +641,6 @@ span {
 
 #skillsSection h3 {
     font-size: var(--subTitleSize);
-}
-
-#skillsSection p {
-    font-size: 1.25rem;
 }
 
 #oneProjectMain {

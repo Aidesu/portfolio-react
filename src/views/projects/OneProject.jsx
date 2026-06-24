@@ -27,8 +27,6 @@ export default function OneProject() {
         }
     }, [projects, params.id]);
 
-    console.log(project);
-
     return (
         <>
             <Link to={"/projects"}>
@@ -44,7 +42,7 @@ export default function OneProject() {
                                 {project.img
                                     ? project.img.map((i) => (
                                           <img
-                                              id={i.img_id}
+                                              key={i.img_id}
                                               src={i.img_link}
                                               alt={i.img_alt}
                                               loading="lazy"
@@ -57,7 +55,7 @@ export default function OneProject() {
                                 <ul>
                                     {project.techno
                                         ? project.techno.map((t) => (
-                                              <li>
+                                              <li key={t.techno_id}>
                                                   <Icon
                                                       icon={t.techno_name}
                                                   ></Icon>

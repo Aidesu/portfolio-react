@@ -20,23 +20,23 @@ export default function Skills() {
                 <section id="skillsSection">
                     <ul>
                         {skills
-                            ? skills.map((s, k) => {
+                            ? skills.map((s) => {
                                   return (
-                                      <li id={k}>
+                                      <li key={s.name}>
                                           <Icon icon={s.icon} color="white" />
 
                                           <article>
                                               <h3>{s.name}</h3>
-                                              <p>
-                                                  Experience :{" "}
-                                                  <div id="progressBarSkills">
+                                              <div className="skillExperience">
+                                                  <span>Experience :</span>
+                                                  <div className="progressBarSkills">
                                                       <div
                                                           style={{
                                                               width: `${s.score}%`,
                                                           }}
                                                       ></div>
                                                   </div>
-                                              </p>
+                                              </div>
                                           </article>
                                       </li>
                                   );

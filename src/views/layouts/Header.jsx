@@ -63,7 +63,11 @@ export default function Header() {
                 </nav>
                 <ol>
                     <li>
-                        <a href="https://github.com/Aidesu" target="blank">
+                        <a
+                            href="https://github.com/Aidesu"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <svg
                                 role="img"
                                 viewBox="0 0 24 24"
@@ -77,7 +81,8 @@ export default function Header() {
                     <li>
                         <a
                             href="https://www.linkedin.com/in/carla-deafiaa-96a58330a/"
-                            target="blank"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <svg
                                 role="img"

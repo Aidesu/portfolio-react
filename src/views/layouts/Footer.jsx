@@ -6,11 +6,6 @@ export default function Footer() {
             <footer>
                 <ul>
                     <li>
-                        <h3>© The Deafiaa Space Company. All right reserved</h3>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
                         <Link to={"/"}>Home</Link>
                     </li>
 
@@ -31,7 +26,11 @@ export default function Footer() {
                 </ul>
                 <ul>
                     <li>
-                        <a href="https://github.com/Aidesu" target="blank">
+                        <a
+                            href="https://github.com/Aidesu"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <svg
                                 role="img"
                                 viewBox="0 0 24 24"
@@ -45,7 +44,8 @@ export default function Footer() {
                     <li>
                         <a
                             href="https://www.linkedin.com/in/carla-deafiaa-96a58330a/"
-                            target="blank"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
                             <svg
                                 role="img"
@@ -59,6 +59,9 @@ export default function Footer() {
                     </li>
                 </ul>
             </footer>
+            <h5 style={{ textAlign: "center" }}>
+                © The Deafiaa Space Company. All rights reserved
+            </h5>
         </>
     );
 }

@@ -170,20 +170,29 @@ export default function Projects() {
                 </div>
                 <section className="animSlideBF">
                     <ul>
-                        {getSortedProject().map((p, k) => (
-                            <li id={`projectCard${k}`}>
-                                <img src={p.logo} alt="" />
+                        {getSortedProject().map((p) => (
+                            <li key={p.id} className="projectCard">
+                                <img src={p.logo} alt={`${p.title} logo`} />
                                 <ol>
                                     <li>
-                                        <h3>{p.title}</h3>
+                                        <h3>
+                                            <Link
+                                                to={`/project/${p.id}`}
+                                                className="projectCardLink"
+                                            >
+                                                {p.title}
+                                            </Link>
+                                        </h3>
                                         <p id="projectsComment">{p.comment}</p>
-                                        <Link to={`/project/${p.id}`}>
-                                            <button>Learn more</button>
-                                        </Link>
                                     </li>
                                     <li>
                                         <p>{p.date}</p>
-                                        <a href={p.link} target="blank">
+                                        <a
+                                            href={p.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="projectGithubLink"
+                                        >
                                             <svg
                                                 role="img"
                                                 viewBox="0 0 24 24"
