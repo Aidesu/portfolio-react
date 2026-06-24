@@ -363,26 +363,28 @@ span {
     padding: 1rem;
 }
 
-#projectsMain ol {
-    display: flex;
-    justify-content: space-between;
-    text-align: start;
-    gap: 1rem;
-    margin-top: auto;
-}
-
-#projectsMain ol li {
+.projectCardBody {
     display: flex;
     flex-direction: column;
-
-    gap: 1.5rem;
+    flex: 1;
+    gap: 0.75rem;
+    text-align: start;
+    padding: 1rem 0.5rem 0;
 }
 
-#projectsMain ol li:nth-child(2) {
-    text-align: end;
+.projectCardFooter {
     display: flex;
-    flex-shrink: 0;
-    width: 40%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1.25rem;
+}
+
+.projectCardIcons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 #projectsMain h3 {
@@ -401,10 +403,10 @@ span {
     border-bottom: solid var(--secText) 2px;
 }
 
-#projectsMain ol li:nth-child(2) p {
-    display: flex;
-    gap: 1rem;
-    justify-content: end;
+.projectDate {
+    color: var(--secText);
+    font-size: 0.95rem;
+    white-space: nowrap;
 }
 
 /* ---- Project card: clickable card + animated gradient border ---- */
@@ -483,10 +485,13 @@ span {
     color: transparent;
 }
 
-/* Keep the GitHub link clickable above the stretched card link */
+/* Keep the GitHub link clickable above the stretched card link,
+   constrained to the icon so clicks beside it open the project page */
 .projectGithubLink {
     position: relative;
     z-index: 2;
+    display: inline-flex;
+    align-items: center;
 }
 
 @property --borderAngle {
