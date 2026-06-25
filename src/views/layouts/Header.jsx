@@ -10,7 +10,8 @@ export default function Header() {
     const handlePointerDown = (event) => {
         const el = headerRef.current;
         if (!el) return;
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+            return;
         const rect = el.getBoundingClientRect();
         const id = rippleId.current++;
         setRipples((prev) => [
@@ -47,7 +48,7 @@ export default function Header() {
                                     isActive ? "navLink inPage" : "navLink"
                                 }
                             >
-                                Home
+                                HOME
                             </NavLink>
                         </li>
                         <li>
@@ -57,7 +58,7 @@ export default function Header() {
                                     isActive ? "navLink inPage" : "navLink"
                                 }
                             >
-                                About
+                                ABOUT
                             </NavLink>
                         </li>
                         <li>
@@ -67,7 +68,7 @@ export default function Header() {
                                     isActive ? "navLink inPage" : "navLink"
                                 }
                             >
-                                Projects
+                                PROJECTS
                             </NavLink>
                         </li>
                         <li>
@@ -77,7 +78,7 @@ export default function Header() {
                                     isActive ? "navLink inPage" : "navLink"
                                 }
                             >
-                                Skills
+                                SKILLS
                             </NavLink>
                         </li>
                         <li>
@@ -87,7 +88,7 @@ export default function Header() {
                                     isActive ? "navLink inPage" : "navLink"
                                 }
                             >
-                                Contact
+                                CONTACT
                             </NavLink>
                         </li>
                     </ul>
