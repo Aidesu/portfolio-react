@@ -1919,7 +1919,11 @@ span {
 
 .sort-btn.active {
     color: var(--bgColor);
-    background: linear-gradient(120deg, var(--accentColor), var(--accentColor2));
+    background: linear-gradient(
+        120deg,
+        var(--accentColor),
+        var(--accentColor2)
+    );
     transform: scale(1.05);
 }
 
