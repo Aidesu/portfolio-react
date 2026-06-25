@@ -766,31 +766,6 @@ header.open .navToggleBar:nth-child(3) {
        so the hero clears the floating header with breathing room */
     position: relative;
     text-align: start;
-    /* Keep the ambient glow from ever spilling past the page edge (which would
-       add horizontal scroll and shove the fixed header against the screen) */
-    overflow-x: clip;
-}
-
-/* Faint dual-accent ambience anchored behind the hero */
-.homeGlow {
-    position: absolute;
-    top: -6rem;
-    inset-inline: 0;
-    height: 36rem;
-    z-index: 0;
-    pointer-events: none;
-    background:
-        radial-gradient(
-            38% 60% at 18% 30%,
-            hsla(306, 57%, 61%, 0.16),
-            transparent 70%
-        ),
-        radial-gradient(
-            38% 60% at 82% 45%,
-            hsla(198, 77%, 65%, 0.14),
-            transparent 70%
-        );
-    filter: blur(10px);
 }
 
 .homeHero {
@@ -1558,7 +1533,7 @@ header.open .navToggleBar:nth-child(3) {
 /* Two-column setup zone — home lab + toolbox side by side to use the width */
 .aboutSetup {
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
     margin-top: 4rem;
     align-items: start;
@@ -1580,6 +1555,105 @@ header.open .navToggleBar:nth-child(3) {
     .aboutSetup .homelabGrid {
         grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
     }
+}
+
+/* My rack — networking gear + custom servers, each with its minimal hardware spec */
+.rackList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.rackCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.1rem 1.25rem;
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        var(--cardColor);
+    border-radius: 14px;
+    box-shadow: 0 8px 26px -18px hsla(306, 57%, 61%, 0.3);
+}
+
+/* shared glass hairline border */
+.rackCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        120deg,
+        hsla(306, 57%, 61%, 0.6),
+        hsla(198, 77%, 65%, 0.5) 55%,
+        hsla(0, 0%, 100%, 0.06)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.rackCardHead {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.rackIcon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 9px;
+    color: var(--c, var(--firstText));
+    background: color-mix(in srgb, var(--c, var(--firstText)) 12%, transparent);
+}
+
+.rackIcon svg {
+    width: 1.4rem;
+    height: 1.4rem;
+}
+
+.rackName {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--firstText);
+}
+
+/* Network / Server pill, tinted with the unit's accent colour */
+.rackKind {
+    margin-left: auto;
+    flex-shrink: 0;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--c, var(--accentColor2));
+    background: color-mix(in srgb, var(--c, var(--firstText)) 12%, transparent);
+}
+
+/* The minimal hardware config */
+.rackSpec {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--secText);
 }
 
 #projectsMain section {
@@ -2168,16 +2242,15 @@ header.open .navToggleBar:nth-child(3) {
 #oneProjectMain {
     /* margin-top inherited from the global `main` (8rem desktop / 10rem mobile)
        so the content clears the floating header */
-    max-width: 1200px; /* roomy view, still tighter than the 1400px global */
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr); /* back gutter | content */
-    align-items: start;
-    column-gap: 1.5rem;
+    max-width: 1400px; /* full-width view, matching the rest of the site */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     padding: 0 1.5rem;
 }
 
-/* Content column; the back link lives in the left gutter so the hero/carousel
-   start at the very top instead of being pushed down by a full-width back row */
+/* The back link sits at the top-left and hugs its own width (align-self), so the
+   content below always spans the full width and is never pushed or narrowed. */
 .opContent {
     display: flex;
     flex-direction: column;
@@ -2233,7 +2306,7 @@ header.open .navToggleBar:nth-child(3) {
     position: sticky;
     top: 6rem;
     z-index: 5;
-    justify-self: start;
+    align-self: flex-start;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -2605,9 +2678,6 @@ header.open .navToggleBar:nth-child(3) {
 }
 
 @media screen and (width <= 900px) {
-    #oneProjectMain {
-        grid-template-columns: 1fr;
-    }
     .opBody {
         grid-template-columns: 1fr;
     }
