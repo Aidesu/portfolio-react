@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
@@ -66,8 +66,10 @@ export default function Header() {
                     />
                 ))}
             </div>
-            <h1>
-                Deafiaa<span>.</span>
+            <h1 className="headerLogo">
+                <Link to="/" onClick={closeMenu} aria-label="Deafiaa — home">
+                    Deafiaa<span className="headerLogoDot">.</span>
+                </Link>
             </h1>
 
             <button
