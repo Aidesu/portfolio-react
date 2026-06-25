@@ -1,9 +1,40 @@
 import { NavLink } from "react-router";
+import { useRef, useState } from "react";
 
 export default function Header() {
+    const headerRef = useRef(null);
+    const rippleId = useRef(0);
+    const [ripples, setRipples] = useState([]);
+
+    // Click: a magenta/cyan ripple bursts from the press point.
+    const handlePointerDown = (event) => {
+        const el = headerRef.current;
+        if (!el) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const rect = el.getBoundingClientRect();
+        const id = rippleId.current++;
+        setRipples((prev) => [
+            ...prev,
+            { id, x: event.clientX - rect.left, y: event.clientY - rect.top },
+        ]);
+    };
+
+    const removeRipple = (id) =>
+        setRipples((prev) => prev.filter((r) => r.id !== id));
+
     return (
         <>
-            <header>
+            <header ref={headerRef} onPointerDown={handlePointerDown}>
+                <div className="headerFx" aria-hidden="true">
+                    {ripples.map((r) => (
+                        <span
+                            key={r.id}
+                            className="headerRipple"
+                            style={{ left: r.x, top: r.y }}
+                            onAnimationEnd={() => removeRipple(r.id)}
+                        />
+                    ))}
+                </div>
                 <h1>
                     Deafiaa<span>.</span>
                 </h1>
@@ -13,7 +44,7 @@ export default function Header() {
                             <NavLink
                                 to={"/"}
                                 className={({ isActive }) =>
-                                    isActive ? "inPage" : ""
+                                    isActive ? "navLink inPage" : "navLink"
                                 }
                             >
                                 Home
@@ -23,7 +54,7 @@ export default function Header() {
                             <NavLink
                                 to={"/about"}
                                 className={({ isActive }) =>
-                                    isActive ? "inPage" : ""
+                                    isActive ? "navLink inPage" : "navLink"
                                 }
                             >
                                 About
@@ -33,7 +64,7 @@ export default function Header() {
                             <NavLink
                                 to={"/projects"}
                                 className={({ isActive }) =>
-                                    isActive ? "inPage" : ""
+                                    isActive ? "navLink inPage" : "navLink"
                                 }
                             >
                                 Projects
@@ -43,7 +74,7 @@ export default function Header() {
                             <NavLink
                                 to={"/skills"}
                                 className={({ isActive }) =>
-                                    isActive ? "inPage" : ""
+                                    isActive ? "navLink inPage" : "navLink"
                                 }
                             >
                                 Skills
@@ -53,7 +84,7 @@ export default function Header() {
                             <NavLink
                                 to={"/contact"}
                                 className={({ isActive }) =>
-                                    isActive ? "inPage" : ""
+                                    isActive ? "navLink inPage" : "navLink"
                                 }
                             >
                                 Contact

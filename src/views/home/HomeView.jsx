@@ -5,7 +5,7 @@ export default function HomeView() {
         <main id="homeMain">
             <div className="homeGlow" aria-hidden="true"></div>
             <section className="homeHero">
-                <div className="homeIntro animSlideL">
+                <div className="homeIntro reveal">
                     <p className="homeStatus">
                         <span
                             className="homeStatusDot"
@@ -34,7 +34,7 @@ export default function HomeView() {
                         </Link>
                     </div>
                 </div>
-                <div className="homePortrait animSlideR">
+                <div className="homePortrait reveal reveal-2">
                     <img src="/pfpCarla.jpg" alt="Carla Deafiaa" />
                 </div>
             </section>

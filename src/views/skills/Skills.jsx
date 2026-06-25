@@ -43,7 +43,7 @@ export default function Skills() {
 
     return (
         <main id="skillsMain">
-            <div className="pageHead">
+            <div className="pageHead reveal">
                 <h1 className="pageTitle">Skills</h1>
                 <p className="pageLede">
                     From the interface down to the server it runs on.
@@ -51,8 +51,12 @@ export default function Skills() {
             </div>
 
             <div className="skillsBento">
-                {groups.map((g) => (
-                    <section key={g.key} className="skillPanel">
+                {groups.map((g, i) => (
+                    <section
+                        key={g.key}
+                        className="skillPanel reveal"
+                        style={{ "--rd": `${0.06 + i * 0.07}s` }}
+                    >
                         <div className="skillPanelHead">
                             <span className="skillPanelPath">{g.label}</span>
                             <span className="skillPanelCount">

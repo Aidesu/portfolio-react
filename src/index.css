@@ -11,7 +11,6 @@
     --subTitleSize: 1.75rem;
     --aSize: 1.5rem;
     --pSize: 1.25rem;
-    --aInPageSize: 1.75rem;
 }
 
 @font-face {
@@ -23,11 +22,6 @@
     :root {
         --titleSize: 3rem;
     }
-
-    #projectsMain ul {
-        grid-template-columns: 50% 50% !important;
-        gap: 1rem !important;
-    }
 }
 
 @media screen and (width <= 768px) {
@@ -37,11 +31,6 @@
         --pSize: 1rem;
         --headTitleSize: 1.5rem;
         --aSize: 1rem;
-        --aInPageSize: 1.25rem;
-    }
-    #projectsMain ul {
-        grid-template-columns: 90% !important;
-        gap: 1rem !important;
     }
 
     header {
@@ -94,6 +83,66 @@ body {
     background-color: var(--bgColor);
 }
 
+/* Animated background — two fixed aurora layers of dual-accent glow that drift
+   slowly behind all content. Oversized + translated (compositor-cheap) so the
+   edges never show. Faint enough to keep text readable. */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+body::before {
+    background:
+        radial-gradient(
+            36rem 36rem at 22% 28%,
+            hsla(306, 57%, 61%, 0.1),
+            transparent 60%
+        ),
+        radial-gradient(
+            40rem 40rem at 80% 72%,
+            hsla(198, 77%, 65%, 0.09),
+            transparent 62%
+        );
+    animation: bgDrift1 26s ease-in-out infinite alternate;
+}
+
+body::after {
+    background:
+        radial-gradient(
+            32rem 32rem at 72% 20%,
+            hsla(198, 77%, 65%, 0.07),
+            transparent 60%
+        ),
+        radial-gradient(
+            34rem 34rem at 24% 82%,
+            hsla(306, 57%, 61%, 0.08),
+            transparent 62%
+        );
+    animation: bgDrift2 34s ease-in-out infinite alternate;
+}
+
+@keyframes bgDrift1 {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+        transform: translate3d(4%, -3%, 0) scale(1.08);
+    }
+}
+
+@keyframes bgDrift2 {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+        transform: translate3d(-3%, 4%, 0) scale(1.06);
+    }
+}
+
 /* Sticky-footer shell: header is fixed (out of flow), main grows, footer
    sits at the bottom — so the content→footer gap is consistent everywhere. */
 #root {
@@ -130,24 +179,36 @@ header {
     width: min(90%, 1320px);
     height: 3.5rem;
     padding: 0 1.5rem;
-    /* frosted glass with a faint dual-accent wash over translucent black */
+    /* Frosted-glass pill (like the original header): dual-accent wash over a
+       dark translucent base. Colour comes alive on hover via the cursor glow. */
     background:
         linear-gradient(
             120deg,
-            hsla(306, 57%, 61%, 0.07),
-            hsla(198, 77%, 65%, 0.07)
+            hsla(306, 57%, 61%, 0.09),
+            hsla(198, 77%, 65%, 0.09)
         ),
-        hsla(0, 0%, 4%, 0.62);
-    backdrop-filter: blur(14px) saturate(140%);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
+        hsla(0, 0%, 4%, 0.6);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
     border-radius: 14px;
     box-shadow:
         0 14px 40px -22px rgba(0, 0, 0, 0.95),
-        0 6px 26px -18px hsla(306, 57%, 61%, 0.35);
+        0 6px 26px -18px hsla(306, 57%, 61%, 0.35),
+        inset 0 1px 0 0 hsla(0, 0%, 100%, 0.06);
     z-index: 10;
+    animation: headerDrop 0.55s ease-out both;
 }
 
-/* Gradient hairline border (magenta → cyan) replacing the flat grey one */
+/* Keep the bar's content above the glow so text never washes out */
+header > h1,
+header > nav,
+header > ol {
+    position: relative;
+    z-index: 1;
+}
+
+/* Gradient hairline border that continuously flows magenta ⇄ cyan — the
+   always-on base animation of the bar. */
 header::after {
     content: "";
     position: absolute;
@@ -155,11 +216,13 @@ header::after {
     border-radius: inherit;
     padding: 1px;
     background: linear-gradient(
-        120deg,
-        hsla(306, 57%, 61%, 0.6),
-        hsla(198, 77%, 65%, 0.5) 55%,
-        hsla(0, 0%, 100%, 0.06)
+        90deg,
+        var(--accentColor),
+        var(--accentColor2),
+        var(--accentColor)
     );
+    background-size: 200% 100%;
+    animation: borderFlow 10s linear infinite;
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
@@ -171,8 +234,67 @@ header::after {
     pointer-events: none;
 }
 
+/* Click ripple — bursts from the press point. Clipped to the rounded bar by
+   .headerFx, so the header itself keeps its (unclipped) glow shadow. */
+.headerFx {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.headerRipple {
+    position: absolute;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        hsla(306, 57%, 61%, 0.5),
+        hsla(198, 77%, 65%, 0.22) 45%,
+        transparent 70%
+    );
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.9;
+    animation: rippleBurst 0.65s ease-out forwards;
+}
+
+@keyframes rippleBurst {
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes borderFlow {
+    from {
+        background-position: 0% 50%;
+    }
+    to {
+        background-position: 200% 50%;
+    }
+}
+
+/* Quiet drop-in on load; keeps the translateX(-50%) centring in every frame */
+@keyframes headerDrop {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
 header h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
+}
+
+header h1 span {
+    font-size: 1em;
 }
 
 header ul {
@@ -354,10 +476,8 @@ a svg:hover {
     fill: var(--accentColor);
 }
 
-header svg:hover {
-    transform: scale(1.1);
-    transform: translate(0, -0.2rem);
-    transition: 0.2s;
+header svg {
+    transition: fill 0.25s ease;
 }
 
 header a {
@@ -365,7 +485,6 @@ header a {
     border-radius: 0.5rem;
     color: var(--firstText);
     text-decoration: none;
-    transform: scale(0.9);
     font-size: var(--aSize);
     transition: 0.2s;
     display: inline-block;
@@ -405,22 +524,79 @@ span {
     font-weight: 200;
 }
 
-.inPage {
-    font-weight: bold;
-    font-size: var(--aInPageSize);
-    text-decoration: underline;
-    transition: 0;
-    text-underline-offset: 0.25rem;
-    color: var(--accentColor2);
-    text-decoration-color: var(--accentColor);
+/* Nav links — small, quiet, reflow-free: colour shift + a gradient underline
+   that grows on hover and stays lit for the active route (the cursor glow on
+   the header is the loud element, so the nav stays understated). */
+.navLink {
+    position: relative;
+    transform: none;
+    padding: 0.35rem 0.65rem;
+    color: var(--secText);
+    font-size: 1rem;
+    font-weight: 400;
+    transition: color 0.25s ease;
+}
+
+.navLink::after {
+    content: "";
+    position: absolute;
+    left: 0.65rem;
+    right: 0.65rem;
+    bottom: 0.05rem;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accentColor), var(--accentColor2));
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+}
+
+.navLink:hover {
+    transform: none;
+    color: var(--firstText);
     font-weight: 400;
 }
 
-.inPage:hover {
-    color: var(--accentColor2);
-    transform: scale(0.9);
+.navLink:hover::after {
+    transform: scaleX(1);
+}
+
+/* Active route — same size & weight (no horizontal jump), underline stays lit */
+.navLink.inPage {
+    color: var(--firstText);
+    font-size: 1rem;
     font-weight: 400;
+    text-decoration: none;
     cursor: default;
+}
+
+.navLink.inPage::after {
+    transform: scaleX(1);
+}
+
+.navLink.inPage:hover {
+    transform: none;
+}
+
+/* Social icons — square buttons so the two align cleanly on the right (the old
+   inline-block svg had a baseline gap that pushed them off-centre). */
+header ol a {
+    display: grid;
+    place-items: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    padding: 0;
+    border-radius: 0.6rem;
+    transition: transform 0.2s ease;
+}
+
+header ol a:hover {
+    transform: translateY(-2px);
+}
+
+header ol svg {
+    display: block;
+    width: 1.3rem;
+    height: 1.3rem;
 }
 
 .color2 {
@@ -690,14 +866,221 @@ span {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    header,
+    header::after,
+    body::before,
+    body::after,
     .homeStatusDot,
-    .homePortrait::before {
+    .homePortrait::before,
+    .nfDot,
+    .reveal {
         animation: none;
     }
+    header {
+        transition: none;
+    }
+    .navLink::after {
+        transition: none;
+    }
+}
+
+/* ===== 404 / Not found =====
+   The error rendered as the developer's own material: a server request trace.
+   Reuses the glass recipe, ambient glow, status dot and reusable buttons. */
+#notFoundMain {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: calc(100svh - 16rem); /* centre the trace panel in view */
+    padding: 0 1.5rem;
+}
+
+/* Dual-accent ambience pooled behind the panel */
+.nfGlow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            40% 50% at 30% 35%,
+            hsla(306, 57%, 61%, 0.14),
+            transparent 70%
+        ),
+        radial-gradient(
+            40% 50% at 70% 62%,
+            hsla(198, 77%, 65%, 0.12),
+            transparent 70%
+        );
+    filter: blur(12px);
+}
+
+/* Glass trace panel — same recipe as the header / cards */
+.nfTrace {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 36rem);
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    border-radius: 16px;
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        hsla(0, 0%, 4%, 0.62);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    box-shadow:
+        0 24px 60px -30px rgba(0, 0, 0, 0.95),
+        0 8px 30px -20px hsla(306, 57%, 61%, 0.35);
+}
+
+/* Gradient hairline border (magenta → cyan) via masked overlay */
+.nfTrace::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        120deg,
+        hsla(306, 57%, 61%, 0.6),
+        hsla(198, 77%, 65%, 0.5) 55%,
+        hsla(0, 0%, 100%, 0.06)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.nfEyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 1.75rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--secText);
+}
+
+.nfDot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--accentColor);
+    box-shadow: 0 0 0 0 hsla(306, 57%, 61%, 0.55);
+    animation: nfPulse 2.6s ease-out infinite;
+}
+
+@keyframes nfPulse {
+    0% {
+        box-shadow: 0 0 0 0 hsla(306, 57%, 61%, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 0.5rem hsla(306, 57%, 61%, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 hsla(306, 57%, 61%, 0);
+    }
+}
+
+/* The request trace */
+.nfLog {
+    margin-bottom: 1.85rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.nfLogLine {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--secText);
+}
+
+.nfMethod {
+    flex: none;
+    color: var(--accentColor2);
+    font-weight: 700;
+}
+
+.nfPath {
+    min-width: 0; /* allow ellipsis inside the flex line for long URLs */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--firstText);
+}
+
+.nfLogStatus {
+    flex-wrap: wrap;
+    gap: 0.35rem 0.85rem;
+    margin-top: 0.6rem;
+}
+
+.nfArrow {
+    font-size: 1.4rem;
+    color: var(--secText);
+}
+
+.nfCode {
+    font-size: clamp(2.75rem, 9vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    background: linear-gradient(90deg, var(--accentColor), var(--accentColor2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.nfStatusText {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--secText);
+}
+
+/* Human headline — override the global centred/uppercase `main h1` */
+#notFoundMain .nfTitle {
+    margin: 0 0 0.9rem;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-align: left;
+    text-indent: 0;
+    text-transform: none;
+    color: var(--firstText);
+}
+
+.nfBody {
+    max-width: 44ch;
+    margin-bottom: 2rem;
+    color: var(--secText);
+    font-size: var(--pSize);
+    font-weight: 200;
+    line-height: 1.7;
+}
+
+.nfCtas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 /* ===== About ===== */
 #aboutMain {
+    max-width: 1200px;
     padding: 0 1.5rem;
 }
 
@@ -706,7 +1089,7 @@ span {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    max-width: 70ch;
+    max-width: 1000px;
     margin: 0 auto 4rem;
 }
 
@@ -729,24 +1112,46 @@ span {
     gap: 1.5rem;
 }
 
+/* Glass panel, same recipe as the header / skill panels — static (no hover) */
 .aboutFocusCard {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
     padding: 1.75rem;
-    background-color: var(--cardColor);
-    border: 1px solid var(--highColor);
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        var(--cardColor);
     border-radius: 16px;
-    transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
+    box-shadow: 0 8px 26px -18px hsla(306, 57%, 61%, 0.3);
 }
 
-.aboutFocusCard:hover {
-    transform: translateY(-6px);
-    border-color: color-mix(in srgb, var(--accentColor) 45%, transparent);
-    box-shadow: 0 16px 34px -20px hsla(306, 57%, 61%, 0.6);
+/* gradient hairline border */
+.aboutFocusCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        120deg,
+        hsla(306, 57%, 61%, 0.6),
+        hsla(198, 77%, 65%, 0.5) 55%,
+        hsla(0, 0%, 100%, 0.06)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
 }
 
 .aboutFocusNum {
@@ -788,21 +1193,253 @@ span {
     }
 }
 
+/* --- About content blocks (home lab, toolbox) --- */
+.aboutBlock {
+    margin-top: 4rem;
+}
+
+.aboutBlockHead {
+    margin-bottom: 1.5rem;
+}
+
+.aboutBlockEyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8rem;
+    color: var(--accentColor2);
+}
+
+.aboutBlockTitle {
+    margin-top: 0.4rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--firstText);
+}
+
+.aboutBlockLede {
+    margin-top: 0.5rem;
+    max-width: 60ch;
+    color: var(--secText);
+    font-size: var(--pSize);
+    font-weight: 200;
+    line-height: 1.7;
+}
+
+/* Home lab service cards (glass, same recipe as the focus cards) */
+.homelabGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+    gap: 1rem;
+}
+
+.homelabCard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        var(--cardColor);
+    border-radius: 14px;
+    box-shadow: 0 8px 26px -18px hsla(306, 57%, 61%, 0.3);
+}
+
+.homelabCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        120deg,
+        hsla(306, 57%, 61%, 0.6),
+        hsla(198, 77%, 65%, 0.5) 55%,
+        hsla(0, 0%, 100%, 0.06)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.homelabIcon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 10px;
+    color: var(--c, var(--firstText));
+    background: color-mix(in srgb, var(--c, var(--firstText)) 12%, transparent);
+}
+
+.homelabIcon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.homelabBody {
+    flex: 1;
+    min-width: 0;
+}
+
+.homelabName {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--firstText);
+}
+
+.homelabRole {
+    margin-top: 0.15rem;
+    font-size: 0.9rem;
+    font-weight: 200;
+    line-height: 1.4;
+    color: var(--secText);
+}
+
+.homelabSince {
+    flex-shrink: 0;
+    align-self: flex-start;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    color: var(--secText);
+}
+
+/* My setup — a single glass card listing the machine's components */
+.setupCard {
+    list-style: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        var(--cardColor);
+    border-radius: 14px;
+    box-shadow: 0 8px 26px -18px hsla(306, 57%, 61%, 0.3);
+}
+
+.setupCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        120deg,
+        hsla(306, 57%, 61%, 0.6),
+        hsla(198, 77%, 65%, 0.5) 55%,
+        hsla(0, 0%, 100%, 0.06)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.setupRow {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.9rem 1.1rem;
+    border-top: 1px solid var(--highColor);
+}
+
+.setupRow:first-child {
+    border-top: none;
+}
+
+.setupIcon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 8px;
+    color: var(--c, var(--firstText));
+    background: color-mix(in srgb, var(--c, var(--firstText)) 12%, transparent);
+}
+
+.setupIcon svg {
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+.setupLabel {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: var(--secText);
+}
+
+.setupValue {
+    margin-left: auto;
+    text-align: right;
+    color: var(--firstText);
+    font-size: 0.95rem;
+}
+
+/* Two-column setup zone — home lab + toolbox side by side to use the width */
+.aboutSetup {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2.5rem;
+    margin-top: 4rem;
+    align-items: start;
+}
+
+.aboutSetup .aboutBlock {
+    margin-top: 0;
+}
+
+.aboutSetup .homelabGrid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media screen and (width <= 900px) {
+    .aboutSetup {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .aboutSetup .homelabGrid {
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    }
+}
+
 #projectsMain section {
     width: 100%;
 }
 
 #projectsMain ul {
     display: grid;
-    grid-template-columns: 30% 30% 30%;
+    /* smaller, responsive cards — ~4 across on desktop, collapses cleanly */
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
     justify-content: center;
-    gap: 3%;
+    gap: 1.5rem;
 }
 
 #projectsMain li {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 0.85rem;
 }
 
 .projectCardBody {
@@ -830,18 +1467,18 @@ span {
 }
 
 #projectsMain h3 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 #projectsMain .projectCardBody p {
     color: var(--secText);
-    font-size: 1rem;
+    font-size: 0.92rem;
 }
 
 #projectsMain img {
-    height: 14rem;
+    height: 10rem;
     object-fit: contain;
-    padding: 3rem 4rem 1rem 4rem;
+    padding: 2rem 2.5rem 0.85rem;
     border-bottom: 1px solid
         color-mix(in srgb, var(--accentColor2) 22%, var(--highColor));
 }
@@ -1065,15 +1702,46 @@ span {
     height: 1.35rem;
 }
 
-/* --- Right: form card --- */
+/* --- Right: form card (glass panel, same recipe as the header / cards) --- */
 .contactForm {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
     padding: 2rem;
-    background-color: var(--cardColor);
-    border: 1px solid var(--highColor);
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        var(--cardColor);
     border-radius: 16px;
+    box-shadow: 0 8px 26px -18px hsla(306, 57%, 61%, 0.3);
+}
+
+/* gradient hairline border */
+.contactForm::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        120deg,
+        hsla(306, 57%, 61%, 0.6),
+        hsla(198, 77%, 65%, 0.5) 55%,
+        hsla(0, 0%, 100%, 0.06)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
 }
 
 .contactField {
@@ -1794,56 +2462,39 @@ span {
     }
 }
 
-@keyframes slideFromRight {
-    0% {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideFromLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideFromBottom {
-    0% {
+/* ===== Unified entrance =====
+   One reveal language used on every page for global coherence: a gentle
+   fade + rise on a soft ease-out. Stagger with .reveal-1..4 (fixed blocks) or
+   an inline --rd (mapped lists). `backwards` fill holds the hidden start
+   through the delay (no flash) but releases afterwards, so it never clobbers
+   :hover transforms or sticky positioning once the reveal is done. */
+@keyframes revealUp {
+    from {
         opacity: 0;
         transform: translateY(20px);
     }
-    100% {
+    to {
         opacity: 1;
-        transform: translateY(0);
+        transform: none;
     }
 }
 
-.animSlideR {
-    animation: slideFromRight 0.4s ease-out forwards;
+.reveal {
+    animation: revealUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: var(--rd, 0s);
 }
 
-.animSlideB {
-    animation: slideFromBottom 0.4s ease-out forwards;
-    position: relative;
+.reveal-1 {
+    animation-delay: 0.08s;
 }
-
-.animSlideL {
-    animation: slideFromLeft 0.4s ease-out forwards;
-    position: relative;
+.reveal-2 {
+    animation-delay: 0.16s;
 }
-
-.animSlideBF {
-    animation: slideFromBottom 0.4s ease-out forwards;
-    position: relative;
+.reveal-3 {
+    animation-delay: 0.24s;
+}
+.reveal-4 {
+    animation-delay: 0.32s;
 }
 
 /* 1. Le conteneur qui aligne les boutons proprement */
