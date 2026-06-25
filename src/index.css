@@ -32,37 +32,6 @@
         --headTitleSize: 1.5rem;
         --aSize: 1rem;
     }
-
-    header {
-        flex-direction: column;
-        height: auto;
-        gap: 0.85rem;
-        padding: 0.9rem 1.25rem;
-        border-radius: 12px;
-    }
-
-    /* extra clearance: the stacked header is taller than the desktop bar */
-    main {
-        margin-top: 10rem;
-    }
-
-    header ul {
-        gap: 0 !important;
-    }
-
-    header a {
-        padding: 0 0.5rem 0 0.5rem !important;
-    }
-
-    header a svg {
-        height: 1.5rem !important;
-        width: 1.5rem !important;
-    }
-
-    header ol {
-        width: 100%;
-        justify-content: center;
-    }
 }
 
 * {
@@ -152,10 +121,13 @@ body::after {
 }
 
 main {
+    box-sizing: border-box;
     flex: 1 0 auto;
     width: 100%;
     max-width: 1400px;
     margin: 8rem auto 0; /* top clears the fixed header; footer owns the bottom gap */
+    /* Side gutters on every page so content never touches the screen edges */
+    padding-inline: clamp(1.25rem, 4vw, 2rem);
 }
 
 main h1 {
@@ -177,8 +149,8 @@ header {
     justify-content: space-between;
     gap: 1.5rem;
     width: min(90%, 1320px);
-    height: 3.5rem;
-    padding: 0 1.5rem;
+    height: 4rem;
+    padding: 0 1.75rem;
     /* Frosted-glass pill (like the original header): dual-accent wash over a
        dark translucent base. Colour comes alive on hover via the cursor glow. */
     background:
@@ -200,9 +172,10 @@ header {
 }
 
 /* Keep the bar's content above the glow so text never washes out */
-header > h1,
-header > nav,
-header > ol {
+header h1,
+header .navToggle,
+header nav,
+header ol {
     position: relative;
     z-index: 1;
 }
@@ -290,7 +263,7 @@ header::after {
 }
 
 header h1 {
-    font-size: 1.6rem;
+    font-size: 1.9rem;
 }
 
 header h1 span {
@@ -318,9 +291,11 @@ hr {
 
 /* ===== Footer ===== */
 .siteFooter {
-    width: 1200px;
-    margin: 32rem auto 0;
-    padding: 2.5rem 2rem 1.75rem;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1200px;
+    margin: clamp(6rem, 14vw, 14rem) auto 0;
+    padding: 2.5rem clamp(1.25rem, 4vw, 2rem) 1.75rem;
     border-top: 1px solid var(--highColor);
 }
 
@@ -532,7 +507,7 @@ span {
     transform: none;
     padding: 0.35rem 0.65rem;
     color: var(--secText);
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 400;
     transition: color 0.25s ease;
 }
@@ -563,7 +538,7 @@ span {
 /* Active route — same size & weight (no horizontal jump), underline stays lit */
 .navLink.inPage {
     color: var(--firstText);
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 400;
     text-decoration: none;
     cursor: default;
@@ -582,8 +557,8 @@ span {
 header ol a {
     display: grid;
     place-items: center;
-    width: 2.3rem;
-    height: 2.3rem;
+    width: 2.5rem;
+    height: 2.5rem;
     padding: 0;
     border-radius: 0.6rem;
     transition: transform 0.2s ease;
@@ -595,8 +570,189 @@ header ol a:hover {
 
 header ol svg {
     display: block;
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 1.45rem;
+    height: 1.45rem;
+}
+
+/* Wrapper around nav + socials. On desktop it's transparent to layout
+   (display:contents) so the bar stays: logo · nav · socials. On mobile it
+   becomes the dropdown panel (see the ≤860px block below). */
+.navGroup {
+    display: contents;
+}
+
+/* Hamburger toggle — hidden until the nav collapses (≤860px). Overrides the
+   global button rules (width/scale/background) so it stays a clean icon button. */
+.navToggle {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    background: transparent;
+    border: 1px solid var(--highColor);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.navToggle:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--accentColor);
+}
+
+.navToggleBar {
+    display: block;
+    width: 1.35rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--firstText);
+    transition:
+        transform 0.28s ease,
+        opacity 0.2s ease;
+}
+
+/* Bars morph into an X while the menu is open */
+header.open .navToggleBar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+header.open .navToggleBar:nth-child(2) {
+    opacity: 0;
+}
+header.open .navToggleBar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ===== Header — mobile (collapsed nav into a hamburger dropdown) ===== */
+@media screen and (max-width: 860px) {
+    /* Compact, fixed-height bar so the clearance below is predictable */
+    header {
+        height: 3.6rem;
+        padding: 0 0.6rem 0 1.25rem;
+        gap: 0.75rem;
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    .navToggle {
+        display: flex;
+    }
+
+    /* The dropdown panel — glass, matching the bar, anchored just below it */
+    .navGroup {
+        display: flex;
+        position: absolute;
+        top: calc(100% + 0.6rem);
+        left: 0;
+        right: 0;
+        z-index: 1;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+        border-radius: 14px;
+        background:
+            linear-gradient(
+                120deg,
+                hsla(306, 57%, 61%, 0.1),
+                hsla(198, 77%, 65%, 0.1)
+            ),
+            hsla(0, 0%, 4%, 0.92);
+        backdrop-filter: blur(16px) saturate(150%);
+        -webkit-backdrop-filter: blur(16px) saturate(150%);
+        box-shadow:
+            0 24px 50px -24px rgba(0, 0, 0, 0.95),
+            0 8px 26px -18px hsla(306, 57%, 61%, 0.4);
+        /* hidden until header.open */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            visibility 0.25s ease;
+    }
+
+    /* gradient hairline border, same recipe as the cards */
+    .navGroup::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.6),
+            hsla(198, 77%, 65%, 0.5) 55%,
+            hsla(0, 0%, 100%, 0.06)
+        );
+        -webkit-mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    header.open .navGroup {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: auto;
+    }
+
+    /* Stacked nav links — full-width rows with comfortable tap targets */
+    .navGroup nav {
+        width: 100%;
+    }
+
+    .navGroup nav ul {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.25rem;
+    }
+
+    .navLink {
+        display: block;
+        padding: 0.85rem 1rem;
+        font-size: 1.05rem;
+        border-radius: 10px;
+    }
+
+    /* Drop the underline indicator in favour of a row highlight */
+    .navLink::after {
+        display: none;
+    }
+
+    .navLink:hover {
+        background: color-mix(in srgb, var(--firstText) 6%, transparent);
+    }
+
+    .navLink.inPage {
+        background: color-mix(in srgb, var(--accentColor) 14%, transparent);
+    }
+
+    .navGroup ol {
+        justify-content: center;
+        gap: 1rem;
+        padding-top: 0.85rem;
+        margin-top: 0.25rem;
+        border-top: 1px solid var(--highColor);
+    }
+
+    /* Clearance below the compact fixed bar */
+    main {
+        margin-top: 6rem;
+    }
 }
 
 .color2 {
@@ -610,14 +766,16 @@ header ol svg {
        so the hero clears the floating header with breathing room */
     position: relative;
     text-align: start;
+    /* Keep the ambient glow from ever spilling past the page edge (which would
+       add horizontal scroll and shove the fixed header against the screen) */
+    overflow-x: clip;
 }
 
 /* Faint dual-accent ambience anchored behind the hero */
 .homeGlow {
     position: absolute;
     top: -6rem;
-    left: -10%;
-    right: -10%;
+    inset-inline: 0;
     height: 36rem;
     z-index: 0;
     pointer-events: none;
@@ -1855,6 +2013,9 @@ header ol svg {
     .contactForm {
         padding: 1.5rem;
         min-width: 0;
+    }
+    .contactHeadline {
+        font-size: 2rem;
     }
 }
 
