@@ -43,9 +43,9 @@ export default function Skills() {
 
     return (
         <main id="skillsMain">
-            <div className="skillsHero">
-                <h1 className="skillsTitle">Skills</h1>
-                <p className="skillsLede">
+            <div className="pageHead">
+                <h1 className="pageTitle">Skills</h1>
+                <p className="pageLede">
                     From the interface down to the server it runs on.
                 </p>
             </div>

@@ -35,10 +35,12 @@ export default function Contact() {
 
     return (
         <main id="contactMain">
-            <h1>Contact</h1>
-            <p className="contactLede">
-                Got a project, a question, or an opportunity? Let's talk.
-            </p>
+            <div className="pageHead">
+                <h1 className="pageTitle">Contact</h1>
+                <p className="pageLede">
+                    Got a project, a question, or an opportunity? Let's talk.
+                </p>
+            </div>
 
             <div className="contactGrid">
                 <aside className="contactAside">

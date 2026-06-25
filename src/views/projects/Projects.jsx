@@ -135,7 +135,13 @@ export default function Projects() {
     return (
         <>
             <main id="projectsMain">
-                <h1>Projects</h1>
+                <div className="pageHead">
+                    <h1 className="pageTitle">Projects</h1>
+                    <p className="pageLede">
+                        Academic work, personal builds, and the home lab I run on
+                        the side.
+                    </p>
+                </div>
 
                 <div className="sortingProjectDiv">
                     {/* Bouton Switch Alphabet */}

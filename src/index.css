@@ -28,20 +28,6 @@
         grid-template-columns: 50% 50% !important;
         gap: 1rem !important;
     }
-    #homeMain img {
-        position: absolute;
-        top: -9rem;
-        left: 50%;
-        transform: translate(-50%);
-        width: 50vw !important;
-    }
-    #homeMain div {
-        margin: 25vw auto;
-    }
-    #homeMain section {
-        width: 90%;
-        margin: 0 auto;
-    }
 }
 
 @media screen and (width <= 768px) {
@@ -60,7 +46,15 @@
 
     header {
         flex-direction: column;
-        gap: 1rem;
+        height: auto;
+        gap: 0.85rem;
+        padding: 0.9rem 1.25rem;
+        border-radius: 12px;
+    }
+
+    /* extra clearance: the stacked header is taller than the desktop bar */
+    main {
+        margin-top: 10rem;
     }
 
     header ul {
@@ -77,9 +71,8 @@
     }
 
     header ol {
-        flex-direction: column;
-        align-items: end !important;
         width: 100%;
+        justify-content: center;
     }
 }
 
@@ -125,21 +118,61 @@ main h1 {
 }
 
 header {
+    box-sizing: border-box;
     position: fixed;
-    top: 0;
+    top: 1rem;
     left: 50%;
-    transform: translate(-50%);
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 90%;
-    height: 4rem;
-    background-color: rgba(0, 0, 0, 0.93);
+    gap: 1.5rem;
+    width: min(90%, 1320px);
+    height: 3.5rem;
+    padding: 0 1.5rem;
+    /* frosted glass with a faint dual-accent wash over translucent black */
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        hsla(0, 0%, 4%, 0.62);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-radius: 14px;
+    box-shadow:
+        0 14px 40px -22px rgba(0, 0, 0, 0.95),
+        0 6px 26px -18px hsla(306, 57%, 61%, 0.35);
     z-index: 10;
 }
 
+/* Gradient hairline border (magenta → cyan) replacing the flat grey one */
+header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        120deg,
+        hsla(306, 57%, 61%, 0.6),
+        hsla(198, 77%, 65%, 0.5) 55%,
+        hsla(0, 0%, 100%, 0.06)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
 header h1 {
-    font-size: var(--headTitleSize);
+    font-size: 2rem;
 }
 
 header ul {
@@ -395,65 +428,364 @@ span {
     font-size: var(--subTitleSize);
 }
 
+/* ===== Home / Hero ===== */
 #homeMain {
-    text-align: start;
-    margin-top: 16rem;
-    display: flex;
-    justify-content: space-between;
+    /* margin-top inherited from the global `main` (8rem desktop / 10rem mobile)
+       so the hero clears the floating header with breathing room */
     position: relative;
-    align-items: start;
+    text-align: start;
 }
 
-#homeMain section {
-    display: flex;
+/* Faint dual-accent ambience anchored behind the hero */
+.homeGlow {
+    position: absolute;
+    top: -6rem;
+    left: -10%;
+    right: -10%;
+    height: 36rem;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            38% 60% at 18% 30%,
+            hsla(306, 57%, 61%, 0.16),
+            transparent 70%
+        ),
+        radial-gradient(
+            38% 60% at 82% 45%,
+            hsla(198, 77%, 65%, 0.14),
+            transparent 70%
+        );
+    filter: blur(10px);
+}
+
+.homeHero {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
     align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    min-height: calc(100svh - 16rem); /* vertically centres the hero in view */
+}
+
+.homeIntro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.homeStatus {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 1.6rem;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--highColor);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accentColor2) 8%, transparent);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--secText);
+}
+
+.homeStatusDot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--accentColor2);
+    box-shadow: 0 0 0 0 hsla(198, 77%, 65%, 0.55);
+    animation: statusPulse 2.4s ease-out infinite;
+}
+
+@keyframes statusPulse {
+    0% {
+        box-shadow: 0 0 0 0 hsla(198, 77%, 65%, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 0.5rem hsla(198, 77%, 65%, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 hsla(198, 77%, 65%, 0);
+    }
+}
+
+.homeRole {
+    font-size: var(--subTitleSize);
+    font-weight: 200;
+    color: var(--firstText);
+}
+
+.homeRole span {
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accentColor), var(--accentColor2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 #homeMain h1 {
     font-size: var(--titleSize);
-    margin: 0.5rem 0;
+    line-height: 1.02;
+    margin: 0.4rem 0 1.4rem;
     text-align: start;
-    /* keep the home title in its original style (untouched by main h1) */
     text-transform: none;
-    letter-spacing: normal;
+    letter-spacing: -0.015em;
     text-indent: 0;
-    font-weight: 400;
+    font-weight: 700;
 }
 
-#homeMain h3 {
-    font-size: var(--subTitleSize);
-    font-weight: 200;
-}
-
-#homeMain p {
-    width: 80%;
+.homeBio {
+    max-width: 48ch;
     color: var(--secText);
     font-size: var(--pSize);
     font-weight: 200;
+    line-height: 1.7;
 }
 
-#homeMain img {
+.homeCtas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.2rem;
+}
+
+.btnPrimary,
+.btnGhost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        border-color 0.2s ease;
+}
+
+.btnPrimary {
+    color: var(--bgColor);
+    background: linear-gradient(90deg, var(--accentColor), var(--accentColor2));
+}
+
+.btnPrimary:hover {
+    color: var(--bgColor);
+    font-weight: 600;
+    transform: translateY(-3px);
+    box-shadow: 0 16px 30px -12px hsla(306, 57%, 61%, 0.65);
+}
+
+.btnArrow {
+    color: inherit;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.btnPrimary:hover .btnArrow {
+    transform: translateX(4px);
+}
+
+.btnGhost {
+    color: var(--firstText);
+    background: transparent;
+    border: 1px solid var(--highColor);
+}
+
+.btnGhost:hover {
+    color: var(--firstText);
+    font-weight: 600;
+    transform: translateY(-3px);
+    border-color: var(--accentColor);
+    box-shadow: 0 16px 30px -16px hsla(198, 77%, 65%, 0.5);
+}
+
+.homePortrait {
+    position: relative;
+    z-index: 1;
+    isolation: isolate; /* keep the glow/ring layered within the portrait */
+    justify-self: center;
+    width: min(100%, 21rem);
+    aspect-ratio: 1;
+}
+
+.homePortrait img {
+    box-sizing: border-box; /* keep the photo circle exactly concentric with the ring */
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     border-radius: 50%;
-    width: 90%;
+    border: 1px solid var(--highColor);
 }
 
+/* Slowly rotating gradient ring — reuses the project-card border motif */
+.homePortrait::before {
+    content: "";
+    position: absolute;
+    inset: -0.55rem;
+    z-index: 2;
+    border-radius: 50%;
+    padding: 2px;
+    background: conic-gradient(
+        from var(--borderAngle, 0deg),
+        var(--accentColor),
+        var(--accentColor2),
+        var(--accentColor)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: borderRotate 8s linear infinite;
+}
+
+/* Soft halo bleeding out behind the portrait */
+.homePortrait::after {
+    content: "";
+    position: absolute;
+    inset: -1.5rem;
+    z-index: 0;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 50% 50%,
+        hsla(306, 57%, 61%, 0.25),
+        transparent 65%
+    );
+    filter: blur(6px);
+}
+
+@media screen and (width <= 900px) {
+    .homeHero {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 2.5rem;
+        margin-top: 2rem;
+        min-height: 0;
+    }
+    .homeIntro {
+        align-items: center;
+    }
+    .homeBio {
+        max-width: 58ch;
+    }
+    .homeCtas {
+        justify-content: center;
+    }
+    .homePortrait {
+        order: -1; /* portrait above the text on narrow screens */
+        width: min(62%, 15rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .homeStatusDot,
+    .homePortrait::before {
+        animation: none;
+    }
+}
+
+/* ===== About ===== */
 #aboutMain {
+    padding: 0 1.5rem;
+}
+
+/* --- Narrative (single readable column) --- */
+.aboutBio {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 4rem;
+    gap: 1.25rem;
+    max-width: 70ch;
+    margin: 0 auto 4rem;
 }
 
-#aboutMain h2 {
-    font-size: 3rem;
-}
-
-#aboutMain p {
-    text-align: start;
-    width: 80%;
+.aboutBio p {
     color: var(--secText);
     font-size: var(--pSize);
     font-weight: 200;
+    line-height: 1.8;
+}
+
+.aboutBio strong {
+    color: var(--firstText);
+    font-weight: 600;
+}
+
+/* --- Focus cards --- */
+.aboutFocus {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.aboutFocusCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.75rem;
+    background-color: var(--cardColor);
+    border: 1px solid var(--highColor);
+    border-radius: 16px;
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.aboutFocusCard:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in srgb, var(--accentColor) 45%, transparent);
+    box-shadow: 0 16px 34px -20px hsla(306, 57%, 61%, 0.6);
+}
+
+.aboutFocusNum {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.85rem;
+    width: fit-content;
+    background: linear-gradient(90deg, var(--accentColor), var(--accentColor2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.aboutFocusCard h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--firstText);
+}
+
+.aboutFocusCard p {
+    color: var(--secText);
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1.65;
+}
+
+.aboutFocusCard .aboutFocusTech {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--accentColor2);
+}
+
+@media screen and (width <= 900px) {
+    .aboutFocus {
+        grid-template-columns: 1fr;
+    }
 }
 
 #projectsMain section {
@@ -501,7 +833,7 @@ span {
     font-size: 1.5rem;
 }
 
-#projectsMain p {
+#projectsMain .projectCardBody p {
     color: var(--secText);
     font-size: 1rem;
 }
@@ -510,7 +842,8 @@ span {
     height: 14rem;
     object-fit: contain;
     padding: 3rem 4rem 1rem 4rem;
-    border-bottom: solid var(--secText) 2px;
+    border-bottom: 1px solid
+        color-mix(in srgb, var(--accentColor2) 22%, var(--highColor));
 }
 
 .projectDate {
@@ -519,19 +852,50 @@ span {
     white-space: nowrap;
 }
 
-/* ---- Project card: clickable card + animated gradient border ---- */
+/* ---- Project card: glass panel (header style) + animated gradient border ---- */
 .projectCard {
     position: relative;
-    background-color: var(--bgColor);
-    border: 1px solid var(--highColor);
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        var(--cardColor);
     border-radius: 15px;
+    box-shadow: 0 6px 22px -16px hsla(306, 57%, 61%, 0.3);
     transition:
         transform 0.35s ease,
-        box-shadow 0.35s ease,
-        border-color 0.35s ease;
+        box-shadow 0.35s ease;
 }
 
-/* Rotating conic-gradient border, revealed on hover */
+/* Static gradient hairline at rest — same recipe as the header */
+.projectCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        120deg,
+        hsla(306, 57%, 61%, 0.6),
+        hsla(198, 77%, 65%, 0.5) 55%,
+        hsla(0, 0%, 100%, 0.06)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    z-index: 3;
+}
+
+/* Rotating conic-gradient border, revealed on hover (handoff from the static one) */
 .projectCard::before {
     content: "";
     position: absolute;
@@ -560,8 +924,11 @@ span {
 
 .projectCard:hover {
     transform: translateY(-8px);
-    border-color: transparent;
-    box-shadow: 0 14px 32px -10px hsla(306, 57%, 61%, 0.5);
+    box-shadow: 0 18px 36px -12px hsla(306, 57%, 61%, 0.55);
+}
+
+.projectCard:hover::after {
+    opacity: 0;
 }
 
 .projectCard:hover::before {
@@ -617,21 +984,12 @@ span {
     max-width: 1080px;
 }
 
-.contactLede {
-    text-align: center;
-    max-width: 46ch;
-    margin: 1.25rem auto 0;
-    color: var(--secText);
-    font-size: var(--pSize);
-    font-weight: 200;
-}
-
 .contactGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: stretch;
     gap: 4rem;
-    margin-top: 3.5rem;
+    margin-top: 1rem;
 }
 
 /* --- Left: invitation + socials (vertically centred against the form) --- */
@@ -835,28 +1193,28 @@ span {
 /* ===== Skills ===== */
 #skillsMain {
     max-width: 1100px;
-    margin-top: 8rem; /* match other pages' title position (no eye jump) */
+    /* margin-top inherited from the global main (8rem/10rem) like every page */
 }
 
-/* --- Hero (compact) --- */
-.skillsHero {
+/* ===== Shared page header (title + lede) — identical across all pages ===== */
+.pageHead {
     text-align: center;
     margin-bottom: 2.5rem;
 }
 
-.skillsTitle {
-    /* size matched to About/Projects; uppercase + spacing inherited from main h1 */
+.pageTitle {
+    /* uppercase + letter-spacing inherited from `main h1` */
     font-size: 2rem;
     margin-bottom: 0.85rem;
 }
 
-.skillsLede {
+.pageLede {
+    max-width: 50ch;
+    margin: 0 auto;
     color: var(--secText);
     font-size: var(--pSize);
     font-weight: 200;
     line-height: 1.6;
-    max-width: 48ch;
-    margin: 0 auto;
 }
 
 /* --- Bento of layer panels (fully static) --- */
@@ -868,13 +1226,45 @@ span {
 }
 
 .skillPanel {
+    position: relative;
     box-sizing: border-box;
     flex: 1 1 460px;
     max-width: 540px;
-    background-color: var(--cardColor);
-    border: 1px solid var(--highColor);
+    /* glass panel, header recipe */
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        var(--cardColor);
     border-radius: 16px;
     padding: 1.5rem;
+    box-shadow: 0 8px 26px -18px hsla(306, 57%, 61%, 0.3);
+}
+
+/* gradient hairline border */
+.skillPanel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        120deg,
+        hsla(306, 57%, 61%, 0.6),
+        hsla(198, 77%, 65%, 0.5) 55%,
+        hsla(0, 0%, 100%, 0.06)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
 }
 
 .skillPanelHead {
@@ -891,11 +1281,6 @@ span {
     font-family: "JetBrains Mono", ui-monospace, monospace;
     color: var(--firstText);
     font-size: 1rem;
-}
-
-.skillPanelPath::before {
-    content: "~/";
-    color: var(--accentColor);
 }
 
 .skillPanelCount {
@@ -950,63 +1335,463 @@ span {
     }
 }
 
+/* ===== One project (detail) ===== */
 #oneProjectMain {
-    margin-top: 12rem;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
+    /* margin-top inherited from the global `main` (8rem desktop / 10rem mobile)
+       so the content clears the floating header */
+    max-width: 1200px; /* roomy view, still tighter than the 1400px global */
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr); /* back gutter | content */
+    align-items: start;
+    column-gap: 1.5rem;
+    padding: 0 1.5rem;
 }
 
-#oneProjectMain h1 {
-    text-align: start;
-    text-indent: 0; /* left-aligned: no centring compensation needed */
-    margin-bottom: 0.5rem;
+/* Content column; the back link lives in the left gutter so the hero/carousel
+   start at the very top instead of being pushed down by a full-width back row */
+.opContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-width: 0;
 }
 
 #oneProjectMain h2 {
     margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--firstText);
 }
 
-#oneProjectMain img {
-    width: 100%;
-    border-radius: 15px;
-    margin-top: 1rem;
-    margin-bottom: 3rem;
-    border: solid var(--cardColor) 0.5rem;
+.opStatus {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--secText);
+    font-size: var(--pSize);
 }
 
-#oneProjectMain svg {
-    width: 4rem;
-    height: 4rem;
-}
-
-#oneProjectMain section {
-    display: grid;
-    grid-template-columns: 65% 35%;
-    gap: 5rem;
-}
-
-#oneProjectMain ul {
-    list-style: none;
-    border-radius: 15px;
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-}
-
-#backBtn {
+/* Shared glass hairline border (header recipe) */
+.opStage::after,
+.opAbout::after,
+.opPanel::after,
+.opBack::after,
+.opTab::after {
+    content: "";
     position: absolute;
-    top: 6rem;
-    left: 5%;
-    transform: translate(-5%);
-    font-size: var(--aSize) !important;
-    padding: 0.5rem 0 0.5rem 0 !important;
-    width: 5rem;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        120deg,
+        hsla(306, 57%, 61%, 0.6),
+        hsla(198, 77%, 65%, 0.5) 55%,
+        hsla(0, 0%, 100%, 0.06)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
 }
 
-#oneProjectMain article {
-    background-color: var(--cardColor);
-    padding: 1.5rem 2rem;
-    border-radius: 15px;
+/* --- Sticky back link (stays reachable on scroll) --- */
+.opBack {
+    position: sticky;
+    top: 6rem;
+    z-index: 5;
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 10px;
+    color: var(--firstText);
+    text-decoration: none;
+    font-size: 1rem;
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        hsla(0, 0%, 4%, 0.62);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    box-shadow: 0 10px 26px -18px hsla(306, 57%, 61%, 0.4);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        color 0.2s ease;
+}
+
+.opBack:hover {
+    color: var(--accentColor2);
+    font-weight: 400;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -16px hsla(306, 57%, 61%, 0.5);
+}
+
+.opBackArrow {
+    transition: transform 0.2s ease;
+}
+
+.opBack:hover .opBackArrow {
+    transform: translateX(-3px);
+}
+
+/* --- Hero --- */
+.opHero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+}
+
+.opHeroTop {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.opHeroHeadings {
+    min-width: 0;
+}
+
+.opLogo {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0.5rem;
+    border-radius: 12px;
+    background: var(--cardColor);
+    border: 1px solid var(--highColor);
+}
+
+.opLogo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+#oneProjectMain h1 {
+    text-align: start;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    text-indent: 0;
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.opTagline {
+    margin-top: 0.2rem;
+    color: var(--secText);
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1.45;
+}
+
+.opGithub {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: fit-content;
+    padding: 0.65rem 1.2rem;
+    border-radius: 10px;
+    color: var(--bgColor);
+    font-weight: 600;
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--accentColor), var(--accentColor2));
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease;
+}
+
+.opGithub svg,
+.opGithub:hover svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: var(--bgColor);
+}
+
+.opGithub:hover {
+    color: var(--bgColor);
+    font-weight: 600;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px -12px hsla(306, 57%, 61%, 0.6);
+}
+
+/* --- Carousel --- */
+.opCarousel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.opStage {
+    position: relative;
+    aspect-ratio: 16 / 9; /* big, video-like viewport that fills the height */
+    max-height: 72vh;
+    border-radius: 16px;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        var(--cardColor);
+}
+
+.opSlide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: safe center; /* centred when it fits, top-aligned when it scrolls */
+    overflow-y: auto;
+    overflow-x: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.45s ease,
+        visibility 0.45s ease;
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--accentColor) transparent;
+}
+
+.opSlide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Image fills the width; taller full-page shots scroll within the frame */
+.opSlide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Modern floating gradient scrollbar (WebKit/Chromium) */
+.opSlide::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Hide the up/down arrow buttons (and corner) at the ends of the scrollbar */
+.opSlide::-webkit-scrollbar-button,
+.opSlide::-webkit-scrollbar-button:single-button,
+.opSlide::-webkit-scrollbar-button:vertical:start,
+.opSlide::-webkit-scrollbar-button:vertical:end,
+.opSlide::-webkit-scrollbar-corner {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.opSlide::-webkit-scrollbar-track {
+    margin: 8px 0;
+    background: transparent;
+}
+
+.opSlide::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    border: 3px solid transparent; /* padding-box trick = thin floating thumb */
+    background: linear-gradient(var(--accentColor), var(--accentColor2));
+    background-clip: padding-box;
+}
+
+.opSlide::-webkit-scrollbar-thumb:hover {
+    border-width: 2px;
+    background: linear-gradient(var(--accentColor2), var(--accentColor));
+    background-clip: padding-box;
+}
+
+/* Tabs to switch screenshots — same pill language as the "View on GitHub" CTA */
+.opTabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.opTab {
+    position: relative;
+    width: auto;
+    padding: 0.55rem 1.1rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.1;
+    cursor: pointer;
+    color: var(--firstText);
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        hsla(0, 0%, 4%, 0.62);
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.25s ease;
+}
+
+.opTab::after {
+    transition: opacity 0.2s ease;
+}
+
+.opTab:hover {
+    transform: translateY(-2px);
+    color: var(--accentColor2);
+    box-shadow: 0 8px 18px -12px hsla(306, 57%, 61%, 0.45);
+}
+
+/* Active tab = the gradient fill, like the GitHub button */
+.opTab.active {
+    color: var(--bgColor);
+    font-weight: 600;
+    background: linear-gradient(90deg, var(--accentColor), var(--accentColor2));
+    box-shadow: 0 10px 22px -12px hsla(306, 57%, 61%, 0.55);
+}
+
+.opTab.active:hover {
+    color: var(--bgColor);
+    transform: translateY(-2px);
+}
+
+.opTab.active::after {
+    opacity: 0;
+}
+
+/* --- Body: about + sidebar --- */
+.opBody {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 18rem;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.opAbout {
+    position: relative;
+    padding: 2rem;
+    border-radius: 16px;
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        var(--cardColor);
+}
+
+.opAbout p {
+    color: var(--secText);
+    font-size: var(--pSize);
+    font-weight: 200;
+    line-height: 1.8;
+}
+
+.opSidebar {
+    position: sticky;
+    top: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.opPanel {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        var(--cardColor);
+}
+
+.opDetails {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.opDetails li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.opDetailKey {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    color: var(--accentColor);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.opDetails li span:last-child {
+    color: var(--firstText);
+    font-size: 0.95rem;
+    text-align: right;
+}
+
+.opStack {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+    gap: 0.6rem;
+}
+
+/* Quiet, understated tiles — present but not attention-grabbing, no hover */
+.opStackItem {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--firstText) 4%, transparent);
+    border: 1px solid color-mix(in srgb, var(--firstText) 9%, transparent);
+    color: var(--secText);
+}
+
+.opStackItem svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+@media screen and (width <= 900px) {
+    #oneProjectMain {
+        grid-template-columns: 1fr;
+    }
+    .opBody {
+        grid-template-columns: 1fr;
+    }
+    .opSidebar {
+        position: static;
+    }
+    .opBack {
+        position: static;
+    }
+    .opStage {
+        aspect-ratio: auto;
+        height: clamp(15rem, 42vh, 24rem);
+    }
 }
 
 @keyframes slideFromRight {
@@ -1071,41 +1856,80 @@ span {
 }
 
 .sort-btn {
-    /* On réinitialise les styles par défaut */
     appearance: none;
     outline: none;
-
-    /* Dimensions et alignement */
+    box-sizing: border-box;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 45px; /* Carré pour les icônes */
+    width: 45px;
     height: 45px;
-
-    /* Bordures et Couleurs */
-    background-color: transparent;
-    border: 2px solid var(--accentColor);
-    color: var(--accentColor);
-    border-radius: 10px; /* Coins arrondis */
-
-    /* Curseur et transition */
+    padding: 0;
+    border: none;
+    border-radius: 10px;
+    /* glass panel, header recipe */
+    background:
+        linear-gradient(
+            120deg,
+            hsla(306, 57%, 61%, 0.07),
+            hsla(198, 77%, 65%, 0.07)
+        ),
+        hsla(0, 0%, 4%, 0.62);
+    color: var(--firstText);
     cursor: pointer;
-    transition: all 0.25s ease-in-out;
     font-size: 1.1rem;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+/* gradient hairline border */
+.sort-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        120deg,
+        hsla(306, 57%, 61%, 0.6),
+        hsla(198, 77%, 65%, 0.5) 55%,
+        hsla(0, 0%, 100%, 0.06)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
 }
 
 .sort-btn:hover {
-    background-color: var(--accentColor);
-    color: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: var(--accentColor2);
+    box-shadow: 0 8px 18px -10px hsla(306, 57%, 61%, 0.5);
 }
 
 .sort-btn.active {
-    background-color: var(--accentColor);
-    color: #ffffff;
-    border-color: var(--accentColor);
+    color: var(--bgColor);
+    background: linear-gradient(
+        120deg,
+        var(--accentColor),
+        var(--accentColor2)
+    );
     transform: scale(1.05);
+}
+
+/* solid gradient fill when active — drop the hairline */
+.sort-btn.active::after {
+    opacity: 0;
 }
 
 .sort-btn:active {
