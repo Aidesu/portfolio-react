@@ -1,10 +1,11 @@
 import { NavLink } from "react-router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Header() {
     const headerRef = useRef(null);
     const rippleId = useRef(0);
     const [ripples, setRipples] = useState([]);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     // Click: a magenta/cyan ripple bursts from the press point.
     const handlePointerDown = (event) => {
@@ -23,23 +24,67 @@ export default function Header() {
     const removeRipple = (id) =>
         setRipples((prev) => prev.filter((r) => r.id !== id));
 
+    // While the mobile menu is open: close on Escape and lock body scroll.
+    useEffect(() => {
+        if (!menuOpen) return;
+        const onKey = (event) => {
+            if (event.key === "Escape") setMenuOpen(false);
+        };
+        document.addEventListener("keydown", onKey);
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.removeEventListener("keydown", onKey);
+            document.body.style.overflow = "";
+        };
+    }, [menuOpen]);
+
+    // Snap back to the inline desktop nav if the viewport grows past the breakpoint.
+    useEffect(() => {
+        const mq = window.matchMedia("(min-width: 861px)");
+        const onChange = (event) => {
+            if (event.matches) setMenuOpen(false);
+        };
+        mq.addEventListener("change", onChange);
+        return () => mq.removeEventListener("change", onChange);
+    }, []);
+
+    const closeMenu = () => setMenuOpen(false);
+
     return (
-        <>
-            <header ref={headerRef} onPointerDown={handlePointerDown}>
-                <div className="headerFx" aria-hidden="true">
-                    {ripples.map((r) => (
-                        <span
-                            key={r.id}
-                            className="headerRipple"
-                            style={{ left: r.x, top: r.y }}
-                            onAnimationEnd={() => removeRipple(r.id)}
-                        />
-                    ))}
-                </div>
-                <h1>
-                    Deafiaa<span>.</span>
-                </h1>
-                <nav>
+        <header
+            ref={headerRef}
+            onPointerDown={handlePointerDown}
+            className={menuOpen ? "open" : ""}
+        >
+            <div className="headerFx" aria-hidden="true">
+                {ripples.map((r) => (
+                    <span
+                        key={r.id}
+                        className="headerRipple"
+                        style={{ left: r.x, top: r.y }}
+                        onAnimationEnd={() => removeRipple(r.id)}
+                    />
+                ))}
+            </div>
+            <h1>
+                Deafiaa<span>.</span>
+            </h1>
+
+            <button
+                type="button"
+                className="navToggle"
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={menuOpen}
+                aria-controls="primaryNav"
+                onClick={() => setMenuOpen((open) => !open)}
+            >
+                <span className="navToggleBar" aria-hidden="true"></span>
+                <span className="navToggleBar" aria-hidden="true"></span>
+                <span className="navToggleBar" aria-hidden="true"></span>
+            </button>
+
+            <div className="navGroup" id="primaryNav">
+                <nav onClick={closeMenu}>
                     <ul>
                         <li>
                             <NavLink
@@ -99,6 +144,7 @@ export default function Header() {
                             href="https://github.com/Aidesu"
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={closeMenu}
                         >
                             <svg
                                 role="img"
@@ -115,6 +161,7 @@ export default function Header() {
                             href="https://www.linkedin.com/in/carla-deafiaa-96a58330a/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={closeMenu}
                         >
                             <svg
                                 role="img"
@@ -127,7 +174,7 @@ export default function Header() {
                         </a>
                     </li>
                 </ol>
-            </header>
-        </>
+            </div>
+        </header>
     );
 }
