@@ -555,7 +555,8 @@ span {
     border-radius: 2px;
     background: linear-gradient(90deg, var(--accentColor), var(--accentColor2));
     transform: scaleX(0);
-    transition: transform 0.25s ease;
+    transform-origin: left; /* the line draws on from the left, never the centre */
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .navLink:hover {
@@ -577,12 +578,24 @@ span {
     cursor: default;
 }
 
+/* Active route: the underline draws itself in on arrival, then stays lit */
 .navLink.inPage::after {
     transform: scaleX(1);
+    transform-origin: left;
+    animation: navUnderline 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .navLink.inPage:hover {
     transform: none;
+}
+
+@keyframes navUnderline {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
 }
 
 /* Social icons — square buttons so the two align cleanly on the right (the old
@@ -1045,8 +1058,10 @@ header.open .navToggleBar:nth-child(3) {
     header {
         transition: none;
     }
-    .navLink::after {
+    .navLink::after,
+    .navLink.inPage::after {
         transition: none;
+        animation: none;
     }
 }
 
