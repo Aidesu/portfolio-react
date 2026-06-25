@@ -138,8 +138,7 @@ export default function Projects() {
                 <div className="pageHead">
                     <h1 className="pageTitle">Projects</h1>
                     <p className="pageLede">
-                        Academic work, personal builds, and the home lab I run on
-                        the side.
+                        Academic work and personal projects
                     </p>
                 </div>
 

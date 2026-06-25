@@ -18,10 +18,9 @@ export default function HomeView() {
                     </h3>
                     <h1>Carla Deafiaa</h1>
                     <p className="homeBio">
-                        I continuously enhance my skills to stay at the forefront
-                        of technology and deliver innovative solutions. Learning
-                        and adapting are part of my daily routine, and I am ready
-                        to fully commit to new opportunities.
+                        Fullstack developer passionate about building modern web
+                        applications, solving problems, and continuously
+                        improving my skills.
                     </p>
                     <div className="homeCtas">
                         <Link to="/projects" className="btnPrimary">
