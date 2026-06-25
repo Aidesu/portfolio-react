@@ -1,11 +1,7 @@
-export default async function getSkills() {
-    try {
-        const response = await fetch("/data/skills.json");
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return await response.json();
-    } catch (error) {
-        // Aborted reloads, offline, or a bad response shouldn't crash the page.
-        console.warn("Could not load skills:", error);
-        return [];
-    }
+import skills from "../data/skills.json";
+
+// Static data, imported at build time so it's present in the prerendered HTML
+// (and identical on client → clean hydration, no loading flash).
+export default function getSkills() {
+    return skills;
 }

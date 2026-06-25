@@ -1,6 +1,9 @@
 import { useState } from "react";
+import usePageMeta from "../../hooks/usePageMeta";
 
 export default function Contact() {
+    usePageMeta();
+
     const [result, setResult] = useState("");
     const [status, setStatus] = useState(""); // "" | "sending" | "success" | "error"
 

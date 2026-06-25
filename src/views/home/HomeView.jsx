@@ -1,6 +1,9 @@
 import { Link } from "react-router";
+import usePageMeta from "../../hooks/usePageMeta";
 
 export default function HomeView() {
+    usePageMeta();
+
     return (
         <main id="homeMain">
             <section className="homeHero">
@@ -12,9 +15,9 @@ export default function HomeView() {
                         ></span>
                         Available for new opportunities
                     </p>
-                    <h3 className="homeRole">
+                    <p className="homeRole">
                         <span>Web</span> Developer
-                    </h3>
+                    </p>
                     <h1>Carla Deafiaa</h1>
                     <p className="homeBio">
                         Fullstack developer passionate about building modern web

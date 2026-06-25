@@ -1,6 +1,6 @@
 import getSkills from "../../controller/getSkills";
-import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
+import usePageMeta from "../../hooks/usePageMeta";
 
 // Preferred display order + labels for the known stack layers.
 // Any extra category found in skills.json is appended automatically,
@@ -14,15 +14,9 @@ const CATEGORY_ORDER = [
 ];
 
 export default function Skills() {
-    const [skills, setSkills] = useState([]);
+    usePageMeta();
 
-    useEffect(() => {
-        async function fetchData() {
-            const skillsData = await getSkills();
-            setSkills(skillsData);
-        }
-        fetchData();
-    }, []);
+    const skills = getSkills();
 
     // Known layers first, then any other category present in the data.
     const knownKeys = CATEGORY_ORDER.map((c) => c.key);

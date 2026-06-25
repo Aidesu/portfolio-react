@@ -1,7 +1,14 @@
 import { Link, useLocation } from "react-router";
+import usePageMeta from "../../hooks/usePageMeta";
 
 export default function NotFound() {
     const { pathname } = useLocation();
+
+    usePageMeta({
+        title: "Page not found — Carla Deafiaa",
+        description: "This page doesn't exist.",
+        noindex: true,
+    });
 
     return (
         <main id="notFoundMain">

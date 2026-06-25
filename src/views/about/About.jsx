@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import usePageMeta from "../../hooks/usePageMeta";
 
 // Self-hosted services Carla runs at home. Edit freely.
 const HOMELAB = [
@@ -101,6 +102,8 @@ const RACK = [
 ];
 
 export default function About() {
+    usePageMeta();
+
     return (
         <main id="aboutMain">
             <div className="pageHead reveal">
