@@ -58,6 +58,35 @@
         />
         <meta name="twitter:image" content="https://deafiaa.com/og.png" />
 
+        <!-- Structured data: who runs this site -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Person",
+                        "@id": "https://deafiaa.com/#person",
+                        "name": "Carla Deafiaa",
+                        "url": "https://deafiaa.com/",
+                        "image": "https://deafiaa.com/pfpCarla.jpg",
+                        "jobTitle": "Full-stack Web Developer",
+                        "description": "Full-stack web developer building modern, thoughtful web applications.",
+                        "sameAs": [
+                            "https://github.com/Aidesu",
+                            "https://www.linkedin.com/in/carla-deafiaa-96a58330a/"
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://deafiaa.com/#website",
+                        "name": "Carla Deafiaa",
+                        "url": "https://deafiaa.com/",
+                        "author": { "@id": "https://deafiaa.com/#person" }
+                    }
+                ]
+            }
+        </script>
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link

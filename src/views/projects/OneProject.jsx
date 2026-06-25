@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import getProjects from "../../controller/getProjects";
 import { useParams, Link } from "react-router";
 import { Icon } from "@iconify/react";
+import usePageMeta from "../../hooks/usePageMeta";
 
 const MONTHS = [
     "Jan",
@@ -52,28 +53,24 @@ function slideLabel(alt, index, title) {
 }
 
 export default function OneProject() {
-    const [projects, setProjects] = useState([]);
-    const [project, setProject] = useState(null); // null = loading, false = not found
-    const [current, setCurrent] = useState(0);
     const params = useParams();
+    const project =
+        getProjects().find((p) => String(p.id) === String(params.id)) ?? false;
+    const [current, setCurrent] = useState(0);
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await getProjects();
-            setProjects(response);
-        }
-        fetchData();
-    }, []);
+    usePageMeta(
+        project
+            ? {
+                  title: `${project.title} — Carla Deafiaa`,
+                  description: project.comment || project.content || "",
+              }
+            : { title: "Project not found — Carla Deafiaa", noindex: true },
+    );
 
+    // Reset the carousel when navigating between projects
     useEffect(() => {
-        if (projects.length) {
-            const found = projects.find(
-                (p) => String(p.id) === String(params.id)
-            );
-            setProject(found || false);
-            setCurrent(0);
-        }
-    }, [projects, params.id]);
+        setCurrent(0);
+    }, [params.id]);
 
     const images =
         project && project.img ? project.img.filter((i) => i.img_link) : [];
@@ -88,7 +85,6 @@ export default function OneProject() {
             </Link>
 
             <div className="opContent">
-                {project === null && <p className="opStatus">Loading…</p>}
                 {project === false && (
                     <p className="opStatus">This project could not be found.</p>
                 )}

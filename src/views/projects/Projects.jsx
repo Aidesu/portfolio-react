@@ -5,21 +5,16 @@ import {
     faArrowDownShortWide,
     faArrowDownWideShort,
 } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import getProjects from "../../controller/getProjects";
 import { Link } from "react-router";
+import usePageMeta from "../../hooks/usePageMeta";
 
 export default function Projects() {
-    const [projects, setProjects] = useState([]);
-    const [sortBy, setSortBy] = useState("date-desc");
+    usePageMeta();
 
-    useEffect(() => {
-        async function fetchData() {
-            const projectsData = await getProjects();
-            setProjects(projectsData);
-        }
-        fetchData();
-    }, []);
+    const [sortBy, setSortBy] = useState("date-desc");
+    const projects = getProjects();
 
     function getSortedProject() {
         const projectsCopy = [...projects];
