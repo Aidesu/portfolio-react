@@ -12,6 +12,8 @@ A single-page app to showcase my projects and skills modern, animated, and deplo
 [![React Router](https://img.shields.io/badge/React%20Router-7-CA4245?logo=reactrouter&logoColor=white)](https://reactrouter.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](#-license)
 
+Live on **[https://deafiaa.com](https://deafiaa.com)**.
+
 </div>
 
 ---
@@ -21,10 +23,6 @@ A single-page app to showcase my projects and skills modern, animated, and deplo
 - [Overview](#-overview)
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
-- [Available Scripts](#-available-scripts)
-- [Project Structure](#-project-structure)
 - [License](#-license)
 
 ---
@@ -61,72 +59,6 @@ A single-page app to showcase my projects and skills modern, animated, and deplo
 | **Linting**    | [ESLint 9](https://eslint.org/)                                                               |
 | **Deployment** | [GitHub Actions](https://docs.github.com/actions) → [GitHub Pages](https://pages.github.com/) |
 | **Data**       | Static JSON (`public/data/`)                                                                  |
-
----
-
-## ✅ Prerequisites
-
-- [Node.js](https://nodejs.org/) **20.19+** (or **22.12+**) required by Vite 7
-- npm (or yarn / pnpm / bun)
-
----
-
-## 🚀 Installation
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/Aidesu/portfolio-react.git
-cd portfolio-react
-
-# 2. Install dependencies
-npm install
-
-# 3. Start the development server
-npm run dev
-```
-
-The app is then available at **[http://localhost:5173](http://localhost:5173)**.
-
----
-
-## 📜 Available Scripts
-
-| Command           | Action                                         |
-| ----------------- | ---------------------------------------------- |
-| `npm run dev`     | Starts the Vite development server             |
-| `npm run build`   | Builds the app for production into `dist/`     |
-| `npm run preview` | Serves the production build locally to preview |
-| `npm run lint`    | Lints the code with ESLint                     |
-
----
-
-## 📁 Project Structure
-
-```
-public/
-├── data/
-│   ├── projects.json     # Project entries (title, stack, links, images)
-│   └── skills.json       # Skills data
-├── projects/             # Per-project logos & screenshots
-└── CNAME                 # Custom domain (deafiaa.com)
-src/
-├── views/
-│   ├── home/             # Landing page
-│   ├── projects/         # Project list (Projects) + single project (OneProject)
-│   ├── skills/           # Skills section
-│   ├── about/            # About section
-│   ├── contact/          # Contact section
-│   ├── layouts/          # Header & Footer
-│   └── notFound/         # 404 page
-├── components/           # Shared components (ScrollTop…)
-├── controller/           # Data fetching (getProjects, getSkills)
-├── App.jsx               # Application & routes
-├── main.jsx              # Entry point
-└── index.css             # Global styles
-.github/
-└── workflows/
-    └── deploy.yml        # CI/CD pipeline (lint → build → deploy)
-```
 
 ---
 
