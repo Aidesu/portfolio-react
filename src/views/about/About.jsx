@@ -60,6 +60,46 @@ const SETUP = [
     },
 ];
 
+// Gear mounted in my rack: networking equipment and custom-built servers.
+// `spec` is the minimal hardware config of each unit — edit freely.
+const RACK = [
+    {
+        name: "Custom Server",
+        kind: "Server",
+        icon: "mdi:server",
+        spec: "i7-6700 · 16GB DDR4 · 4TB RAID5",
+        color: "#7AE582",
+    },
+    {
+        name: "Raspberry Pi 4",
+        kind: "Server",
+        icon: "mdi:raspberry-pi",
+        spec: "8GB RAM · ARM",
+        color: "#E5466A",
+    },
+    {
+        name: "Zyxel USG Flex 100",
+        kind: "Network",
+        icon: "mdi:firewall",
+        spec: "Firewall / security gateway",
+        color: "#C160EF",
+    },
+    {
+        name: "Zyxel GS1900-48",
+        kind: "Network",
+        icon: "mdi:switch",
+        spec: "48-port managed switch",
+        color: "#5BC8F5",
+    },
+    {
+        name: "TP-Link Switch",
+        kind: "Network",
+        icon: "mdi:switch",
+        spec: "6-port Gigabit",
+        color: "#7AE0C2",
+    },
+];
+
 export default function About() {
     return (
         <main id="aboutMain">
@@ -155,6 +195,34 @@ export default function About() {
                                 </span>
                                 <span className="setupLabel">{c.label}</span>
                                 <span className="setupValue">{c.value}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+
+                <section className="aboutBlock reveal reveal-2">
+                    <div className="aboutBlockHead">
+                        <h2 className="aboutBlockTitle">My rack</h2>
+                        <p className="aboutBlockLede">
+                            Networking gear and custom-built servers, always on.
+                        </p>
+                    </div>
+
+                    <ul className="rackList">
+                        {RACK.map((d) => (
+                            <li
+                                key={d.name}
+                                className="rackCard"
+                                style={{ "--c": d.color }}
+                            >
+                                <div className="rackCardHead">
+                                    <span className="rackIcon">
+                                        <Icon icon={d.icon} />
+                                    </span>
+                                    <span className="rackName">{d.name}</span>
+                                    <span className="rackKind">{d.kind}</span>
+                                </div>
+                                <p className="rackSpec">{d.spec}</p>
                             </li>
                         ))}
                     </ul>

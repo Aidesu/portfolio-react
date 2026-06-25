@@ -3,7 +3,6 @@ import { Link } from "react-router";
 export default function HomeView() {
     return (
         <main id="homeMain">
-            <div className="homeGlow" aria-hidden="true"></div>
             <section className="homeHero">
                 <div className="homeIntro reveal">
                     <p className="homeStatus">
