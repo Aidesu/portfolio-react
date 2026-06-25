@@ -352,5 +352,59 @@
                 "techno_name": "simple-icons:css3"
             }
         ]
+    },
+    {
+        "id": 14,
+        "title": "StatEko",
+        "comment": "Personal finance management website, clear and multilingual",
+        "content": "During this project, I built a complete budgeting and financial tracking web application using Next.js 16 and TypeScript. I implemented secure authentication with Auth.js v5, handled complex database relationships using PostgreSQL and Prisma, and created interactive data visualizations with Apache ECharts. I also integrated per-language routing to make the platform fully multilingual (English, French, Japanese) and leveraged Docker Compose for local database management.",
+        "type": "personal",
+        "link": "https://github.com/Aidesu/project-01",
+        "date": "2026-06-07",
+        "logo": "/projects/StatEko/StatEkoLogo.png",
+        "coop": false,
+        "img": [
+            {
+                "img_id": 0,
+                "img_link": "/projects/StatEko/img/StatEkoLanding.png",
+                "img_alt": "StatEko Landing Page"
+            },
+            {
+                "img_id": 1,
+                "img_link": "/projects/StatEko/img/StatEkoAnalytics.png",
+                "img_alt": "StatEko Analytics Dashboard"
+            },
+            {
+                "img_id": 2,
+                "img_link": "/projects/StatEko/img/StatEkoMarkets.png",
+                "img_alt": "StatEko Market Page"
+            }
+        ],
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "simple-icons:nextdotjs"
+            },
+            {
+                "techno_id": 1,
+                "techno_name": "simple-icons:typescript"
+            },
+            {
+                "techno_id": 2,
+                "techno_name": "simple-icons:postgresql"
+            },
+            {
+                "techno_id": 3,
+                "techno_name": "simple-icons:prisma"
+            },
+            {
+                "techno_id": 4,
+                "techno_name": "simple-icons:tailwindcss"
+            },
+            {
+                "techno_id": 5,
+                "techno_name": "simple-icons:docker"
+            }
+        ]
     }
 ]
