@@ -135,14 +135,14 @@ export default function Projects() {
     return (
         <>
             <main id="projectsMain">
-                <div className="pageHead">
+                <div className="pageHead reveal">
                     <h1 className="pageTitle">Projects</h1>
                     <p className="pageLede">
                         Academic work and personal projects
                     </p>
                 </div>
 
-                <div className="sortingProjectDiv">
+                <div className="sortingProjectDiv reveal reveal-1">
                     {/* Bouton Switch Alphabet */}
                     <button
                         className={`sort-btn ${sortBy.includes("alpha") ? "active" : ""}`}
@@ -173,10 +173,14 @@ export default function Projects() {
                         />
                     </button>
                 </div>
-                <section className="animSlideBF">
+                <section>
                     <ul>
-                        {getSortedProject().map((p) => (
-                            <li key={p.id} className="projectCard">
+                        {getSortedProject().map((p, i) => (
+                            <li
+                                key={p.id}
+                                className="projectCard reveal"
+                                style={{ "--rd": `${0.12 + Math.min(i, 7) * 0.05}s` }}
+                            >
                                 <img src={p.logo} alt={`${p.title} logo`} />
                                 <div className="projectCardBody">
                                     <h3>

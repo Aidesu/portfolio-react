@@ -1,7 +1,69 @@
+import { Icon } from "@iconify/react";
+
+// Self-hosted services Carla runs at home. Edit freely.
+const HOMELAB = [
+    {
+        name: "Home Assistant",
+        icon: "simple-icons:homeassistant",
+        role: "Home automation & routines",
+        since: "2020",
+        color: "#18BCF2",
+    },
+    {
+        name: "Proxmox",
+        icon: "simple-icons:proxmox",
+        role: "Virtualisation VMs & containers",
+        since: "2023",
+        color: "#E57000",
+    },
+    {
+        name: "TrueNAS",
+        icon: "simple-icons:truenas",
+        role: "Storage & backups",
+        since: "2023",
+        color: "#0095D5",
+    },
+    {
+        name: "Ollama",
+        icon: "simple-icons:ollama",
+        role: "Local LLMs, wired into projects",
+        color: "#FFFFFF",
+    },
+];
+
+// My main workstation. CPU is real fill the rest ("—" placeholders).
+const SETUP = [
+    {
+        label: "CPU",
+        value: "Intel Core i7-9900K",
+        icon: "mdi:cpu-64-bit",
+        color: "#5BC0EB",
+    },
+    {
+        label: "GPU",
+        value: "RTX 3080",
+        icon: "mdi:expansion-card",
+        color: "#7AE582",
+    },
+    { label: "RAM", value: "32GB", icon: "mdi:memory", color: "#C160EF" },
+    {
+        label: "Storage",
+        value: "3.5TB",
+        icon: "mdi:harddisk",
+        color: "#F2A65A",
+    },
+    {
+        label: "Motherboard",
+        value: "Aorus Z390",
+        icon: "mdi:developer-board",
+        color: "#5BC8F5",
+    },
+];
+
 export default function About() {
     return (
         <main id="aboutMain">
-            <div className="pageHead">
+            <div className="pageHead reveal">
                 <h1 className="pageTitle">About me</h1>
                 <p className="pageLede">
                     Full-stack developer with a curiosity for everything behind
@@ -9,7 +71,7 @@ export default function About() {
                 </p>
             </div>
 
-            <div className="aboutBio animSlideBF">
+            <div className="aboutBio reveal reveal-1">
                 <div>
                     <p>
                         I&apos;m a developer who enjoys turning ideas into
@@ -34,23 +96,23 @@ export default function About() {
             </div>
 
             <section className="aboutFocus">
-                <article className="aboutFocusCard">
+                <article className="aboutFocusCard reveal reveal-2">
                     <span className="aboutFocusNum">01</span>
                     <h3>Front-end</h3>
                     <p>
                         Building interfaces that feel intuitive and stay
-                        readable as they grow — with care for layout, motion and
+                        readable as they grow with care for layout, motion and
                         the small details.
                     </p>
                     <p className="aboutFocusTech">
                         React · Next.js · Astro · JavaScript
                     </p>
                 </article>
-                <article className="aboutFocusCard">
+                <article className="aboutFocusCard reveal reveal-3">
                     <span className="aboutFocusNum">02</span>
                     <h3>Back-end &amp; data</h3>
                     <p>
-                        APIs, auth and data models that hold together — from
+                        APIs, auth and data models that hold together from
                         Symfony and Node services to relational and document
                         databases.
                     </p>
@@ -58,19 +120,46 @@ export default function About() {
                         Symfony · Node.js · PHP · SQL / NoSQL
                     </p>
                 </article>
-                <article className="aboutFocusCard">
+                <article className="aboutFocusCard reveal reveal-4">
                     <span className="aboutFocusNum">03</span>
                     <h3>Infra &amp; self-hosting</h3>
                     <p>
-                        Running real systems at home: virtualisation, storage,
-                        automation and local AI — the practical side of how
-                        software lives in production.
+                        Running real systems at home: virtualisation, storage
+                        and automation the practical side of how software lives
+                        in production.
                     </p>
                     <p className="aboutFocusTech">
-                        Proxmox · TrueNAS · Home Assistant · Ollama
+                        Proxmox · TrueNAS · Home Assistant
                     </p>
                 </article>
             </section>
+
+            <div className="aboutSetup">
+                <section className="aboutBlock reveal reveal-1">
+                    <div className="aboutBlockHead">
+                        <h2 className="aboutBlockTitle">My computer</h2>
+                        <p className="aboutBlockLede">
+                            What I build and run everything on.
+                        </p>
+                    </div>
+
+                    <ul className="setupCard">
+                        {SETUP.map((c) => (
+                            <li
+                                key={c.label}
+                                className="setupRow"
+                                style={{ "--c": c.color }}
+                            >
+                                <span className="setupIcon">
+                                    <Icon icon={c.icon} />
+                                </span>
+                                <span className="setupLabel">{c.label}</span>
+                                <span className="setupValue">{c.value}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            </div>
         </main>
     );
 }

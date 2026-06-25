@@ -95,7 +95,7 @@ export default function OneProject() {
 
                 {project && (
                     <>
-                        <div className="opHero animSlideBF">
+                        <div className="opHero reveal">
                             <div className="opHeroTop">
                                 {project.logo && (
                                     <div className="opLogo">
@@ -137,7 +137,7 @@ export default function OneProject() {
 
                         {images.length > 0 && (
                             <section
-                                className="opCarousel animSlideBF"
+                                className="opCarousel reveal reveal-1"
                                 aria-label={`${project.title} screenshots`}
                             >
                                 {images.length > 1 && (
@@ -191,7 +191,7 @@ export default function OneProject() {
                         )}
 
                         <section className="opBody">
-                            <article className="opAbout animSlideL">
+                            <article className="opAbout reveal reveal-2">
                                 <h2>About this project</h2>
                                 <p>
                                     {project.content ||
@@ -200,7 +200,7 @@ export default function OneProject() {
                                 </p>
                             </article>
 
-                            <aside className="opSidebar animSlideR">
+                            <aside className="opSidebar reveal reveal-3">
                                 <div className="opPanel">
                                     <h2>Details</h2>
                                     <ul className="opDetails">

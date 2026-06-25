@@ -35,7 +35,7 @@ export default function Contact() {
 
     return (
         <main id="contactMain">
-            <div className="pageHead">
+            <div className="pageHead reveal">
                 <h1 className="pageTitle">Contact</h1>
                 <p className="pageLede">
                     Got a project, a question, or an opportunity? Let's talk.
@@ -43,7 +43,7 @@ export default function Contact() {
             </div>
 
             <div className="contactGrid">
-                <aside className="contactAside">
+                <aside className="contactAside reveal reveal-1">
                     <h2 className="contactHeadline">
                         Let's build something <span>together</span>.
                     </h2>
@@ -93,7 +93,7 @@ export default function Contact() {
                     </div>
                 </aside>
 
-                <form onSubmit={onSubmit} className="contactForm">
+                <form onSubmit={onSubmit} className="contactForm reveal reveal-2">
                     <div className="contactField">
                         <label htmlFor="name">
                             <span className="contactFieldNum">01</span> Name
