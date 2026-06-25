@@ -270,6 +270,39 @@ header h1 span {
     font-size: 1em;
 }
 
+/* Site name is a link back home. Inherit the h1's size/weight (so the generic
+   `header a` rules don't shrink it) and add a quiet, on-brand hover. */
+.headerLogo a {
+    display: inline-block;
+    padding: 0.2rem 0.35rem;
+    margin: -0.2rem -0.35rem; /* larger tap target without shifting the layout */
+    border-radius: 8px;
+    color: var(--firstText);
+    font-size: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+    transition: text-shadow 0.3s ease;
+}
+
+.headerLogo a:hover {
+    color: var(--firstText); /* cancel the global a:hover magenta + bold */
+    font-weight: inherit;
+    text-shadow: 0 0 22px hsla(306, 57%, 61%, 0.4);
+}
+
+.headerLogoDot {
+    display: inline-block;
+    color: var(--accentColor);
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.headerLogo a:hover .headerLogoDot {
+    color: var(--accentColor2);
+    transform: scale(1.4);
+}
+
 header ul {
     display: flex;
     gap: 2rem;
@@ -522,7 +555,8 @@ span {
     border-radius: 2px;
     background: linear-gradient(90deg, var(--accentColor), var(--accentColor2));
     transform: scaleX(0);
-    transition: transform 0.25s ease;
+    transform-origin: left; /* the line draws on from the left, never the centre */
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .navLink:hover {
@@ -544,12 +578,24 @@ span {
     cursor: default;
 }
 
+/* Active route: the underline draws itself in on arrival, then stays lit */
 .navLink.inPage::after {
     transform: scaleX(1);
+    transform-origin: left;
+    animation: navUnderline 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .navLink.inPage:hover {
     transform: none;
+}
+
+@keyframes navUnderline {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
 }
 
 /* Social icons — square buttons so the two align cleanly on the right (the old
@@ -1012,8 +1058,10 @@ header.open .navToggleBar:nth-child(3) {
     header {
         transition: none;
     }
-    .navLink::after {
+    .navLink::after,
+    .navLink.inPage::after {
         transition: none;
+        animation: none;
     }
 }
 
