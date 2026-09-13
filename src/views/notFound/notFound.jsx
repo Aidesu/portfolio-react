@@ -5,7 +5,7 @@ export default function NotFound() {
     const { pathname } = useLocation();
 
     usePageMeta({
-        title: "Page not found — Carla Deafiaa",
+        title: "Page not found Carla Deafiaa",
         description: "This page doesn't exist.",
         noindex: true,
     });
@@ -35,7 +35,7 @@ export default function NotFound() {
 
                 <h1 className="nfTitle">This page isn't on the map</h1>
                 <p className="nfBody">
-                    The route you followed doesn't exist on this site — it may
+                    The route you followed doesn't exist on this site it may
                     have moved, or it was never here. Let's get you back on a
                     known route.
                 </p>

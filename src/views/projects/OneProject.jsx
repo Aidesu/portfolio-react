@@ -61,10 +61,10 @@ export default function OneProject() {
     usePageMeta(
         project
             ? {
-                  title: `${project.title} — Carla Deafiaa`,
+                  title: `${project.title} Carla Deafiaa`,
                   description: project.comment || project.content || "",
               }
-            : { title: "Project not found — Carla Deafiaa", noindex: true },
+            : { title: "Project not found Carla Deafiaa", noindex: true },
     );
 
     // Reset the carousel when navigating between projects

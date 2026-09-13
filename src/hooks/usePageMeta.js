@@ -15,11 +15,11 @@ function setMeta(attr, key, content) {
 // Keeps the document <head> in sync on client-side navigation. Static routes
 // resolve from ROUTE_META by path; dynamic/utility routes pass an override
 // ({ title, description, noindex }). The initial <head> of each page is already
-// baked in by prerender.mjs — this just updates it as the user navigates.
+// baked in by prerender.mjs this just updates it as the user navigates.
 export default function usePageMeta(override) {
     const { pathname } = useLocation();
     const meta = override || ROUTE_META[pathname] || {};
-    const title = meta.title || `${SITE} — Web Developer`;
+    const title = meta.title || `${SITE} Web Developer`;
     const description = meta.description || DEFAULT_DESCRIPTION;
     const noindex = !!meta.noindex;
 

@@ -28,11 +28,11 @@ export default function Contact() {
                 form.reset();
             } else {
                 setStatus("error");
-                setResult("Something went wrong — please try again.");
+                setResult("Something went wrong please try again.");
             }
         } catch {
             setStatus("error");
-            setResult("Network error — please try again.");
+            setResult("Network error please try again.");
         }
     };
 

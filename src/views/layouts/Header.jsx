@@ -67,7 +67,7 @@ export default function Header() {
                 ))}
             </div>
             <h1 className="headerLogo">
-                <Link to="/" onClick={closeMenu} aria-label="Deafiaa — home">
+                <Link to="/" onClick={closeMenu} aria-label="Deafiaa home">
                     Deafiaa<span className="headerLogoDot">.</span>
                 </Link>
             </h1>

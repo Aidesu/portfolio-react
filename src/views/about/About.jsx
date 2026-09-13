@@ -62,13 +62,13 @@ const SETUP = [
 ];
 
 // Gear mounted in my rack: networking equipment and custom-built servers.
-// `spec` is the minimal hardware config of each unit — edit freely.
+// `spec` is the minimal hardware config of each unit edit freely.
 const RACK = [
     {
         name: "Custom Server",
         kind: "Server",
         icon: "mdi:server",
-        spec: "i7-6700 · 16GB DDR4 · 4TB RAID5",
+        spec: "i7-6700 · 32GB DDR4 · 4TB RAID5",
         color: "#7AE582",
     },
     {

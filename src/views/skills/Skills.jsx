@@ -25,7 +25,7 @@ export default function Skills() {
         .map((k) => ({ key: k, label: k }));
 
     // Build the panels, dropping empty layers.
-    // `score` is never shown — it only ranks skills within a layer.
+    // `score` is never shown it only ranks skills within a layer.
     const groups = [...CATEGORY_ORDER, ...extraCats]
         .map((cat) => ({
             ...cat,
