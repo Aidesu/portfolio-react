@@ -354,7 +354,7 @@
         ]
     },
     {
-        "id": 14,
+        "id": 12,
         "title": "StatEko",
         "comment": "Personal finance management website, clear and multilingual",
         "content": "During this project, I built a complete budgeting and financial tracking web application using Next.js 16 and TypeScript. I implemented secure authentication with Auth.js v5, handled complex database relationships using PostgreSQL and Prisma, and created interactive data visualizations with Apache ECharts. I also integrated per-language routing to make the platform fully multilingual (English, French, Japanese) and leveraged Docker Compose for local database management.",
@@ -404,6 +404,42 @@
             {
                 "techno_id": 5,
                 "techno_name": "simple-icons:docker"
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "title": "Hi.",
+        "comment": "Personalized browser new tab extension",
+        "content": "Customizable browser extension that turns every new tab into a personal dashboard, combining favorite sites, weather, news, tasks, and custom wallpapers in a clean and privacy-focused interface.",
+        "type": "personal",
+        "link": "https://github.com/Aidesu/project-05",
+        "date": "2026-09-03",
+        "logo": "/projects/Hi./HiLogo.png",
+        "coop": false,
+        "img": [
+            {
+                "img_id": 0,
+                "img_link": "/projects/Hi./img/new-tab.png",
+                "img_alt": "StatEko Landing Page"
+            }
+        ],
+        "techno": [
+            {
+                "techno_id": 0,
+                "techno_name": "simple-icons:react"
+            },
+            {
+                "techno_id": 1,
+                "techno_name": "simple-icons:typescript"
+            },
+            {
+                "techno_id": 2,
+                "techno_name": "simple-icons:vite"
+            },
+            {
+                "techno_id": 4,
+                "techno_name": "simple-icons:tailwindcss"
             }
         ]
     }
