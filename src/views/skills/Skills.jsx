@@ -40,7 +40,7 @@ export default function Skills() {
             <div className="pageHead reveal">
                 <h1 className="pageTitle">Skills</h1>
                 <p className="pageLede">
-                    From the interface down to the server it runs on.
+                    What I use, from servers to web apps.
                 </p>
             </div>
 

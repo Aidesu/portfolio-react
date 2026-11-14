@@ -2,32 +2,32 @@
 // navigation) and by prerender.mjs (injected into each static HTML <head>).
 export const SITE = "Carla Deafiaa";
 export const DEFAULT_DESCRIPTION =
-    "Carla Deafiaa full-stack web developer building modern, thoughtful web applications. Self-hosting and home-lab enthusiast.";
+    "Carla Deafiaa, system administrator in training with a web development background.";
 
 export const ROUTE_META = {
     "/": {
-        title: `${SITE} Web Developer`,
+        title: `${SITE} · System Administrator`,
         description:
-            "Full-stack web developer building modern, thoughtful web applications. Self-hosting and home-lab enthusiast.",
+            "System administrator in training with a web development background. Linux, Proxmox, Docker and networking.",
     },
     "/about": {
         title: `About ${SITE}`,
         description:
-            "Full-stack developer with a curiosity for everything behind the screen focus areas, home workstation and a self-hosted rack.",
+            "Background and focus areas of Carla Deafiaa, system administrator in training.",
     },
     "/projects": {
         title: `Projects ${SITE}`,
         description:
-            "Academic and personal projects by Carla Deafiaa web apps, tools and self-hosted services.",
+            "Academic and personal projects by Carla Deafiaa: web apps and self-hosted services.",
     },
     "/skills": {
         title: `Skills ${SITE}`,
         description:
-            "The full stack Carla Deafiaa works with, from the interface down to the server it runs on.",
+            "Tools and technologies Carla Deafiaa works with.",
     },
     "/contact": {
         title: `Contact ${SITE}`,
         description:
-            "Get in touch with Carla Deafiaa about a project, a question, or an opportunity.",
+            "Contact Carla Deafiaa.",
     },
 };

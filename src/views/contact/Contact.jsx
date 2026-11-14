@@ -41,19 +41,18 @@ export default function Contact() {
             <div className="pageHead reveal">
                 <h1 className="pageTitle">Contact</h1>
                 <p className="pageLede">
-                    Got a project, a question, or an opportunity? Let's talk.
+                    A question or an opportunity? Write to me.
                 </p>
             </div>
 
             <div className="contactGrid">
                 <aside className="contactAside reveal reveal-1">
                     <h2 className="contactHeadline">
-                        Let's build something <span>together</span>.
+                        Get in <span>touch</span>.
                     </h2>
                     <p className="contactAsideText">
-                        I'm always looking to take on new opportunities and
-                        challenges. Drop a message and I'll get back to you as
-                        soon as I can.
+                        Send me a message and I&apos;ll reply as soon as I
+                        can.
                     </p>
                     <div className="contactReach">
                         <span className="contactReachLabel">reach me on</span>
@@ -128,7 +127,7 @@ export default function Contact() {
                         <textarea
                             id="message"
                             name="message"
-                            placeholder="Tell me about your project or idea…"
+                            placeholder="Your message"
                             required
                         ></textarea>
                     </div>
