@@ -6,7 +6,7 @@ export const DEFAULT_DESCRIPTION =
 
 export const ROUTE_META = {
     "/": {
-        title: `${SITE} | System Administrator`,
+        title: SITE,
         description:
             "System administrator in training with a web development background. Linux, Proxmox, Docker and networking.",
     },

@@ -19,7 +19,7 @@ function setMeta(attr, key, content) {
 export default function usePageMeta(override) {
     const { pathname } = useLocation();
     const meta = override || ROUTE_META[pathname] || {};
-    const title = meta.title || `${SITE} | System Administrator`;
+    const title = meta.title || SITE;
     const description = meta.description || DEFAULT_DESCRIPTION;
     const noindex = !!meta.noindex;
 

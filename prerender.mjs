@@ -36,7 +36,7 @@ const routes = [
 let n = 0;
 for (const { url, meta } of routes) {
     const appHtml = render(url);
-    const title = meta.title || `${SITE} | System Administrator`;
+    const title = meta.title || SITE;
     const description = clamp(meta.description || DEFAULT_DESCRIPTION);
     const canonical = BASE + url;
 
