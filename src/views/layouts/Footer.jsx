@@ -11,8 +11,7 @@ export default function Footer() {
                         Deafiaa<span>.</span>
                     </Link>
                     <p className="footerTagline">
-                        Full-stack developer with a curiosity for everything
-                        behind the screen.
+                        System administrator in training.
                     </p>
                     <ul className="footerSocials">
                         <li>
@@ -75,7 +74,7 @@ export default function Footer() {
             </div>
 
             <div className="footerBottom">
-                <p>© {year} The Deafiaa Space Company. All rights reserved.</p>
+                <p>© {year} Carla Deafiaa</p>
                 <p className="footerColophon">built with react</p>
             </div>
         </footer>

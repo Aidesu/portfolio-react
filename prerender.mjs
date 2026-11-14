@@ -27,7 +27,7 @@ const routes = [
     ...projects.map((p) => ({
         url: `/project/${p.id}`,
         meta: {
-            title: `${p.title} ${SITE}`,
+            title: `${p.title} | ${SITE}`,
             description: clamp(p.comment || p.content || DEFAULT_DESCRIPTION),
         },
     })),
@@ -36,7 +36,7 @@ const routes = [
 let n = 0;
 for (const { url, meta } of routes) {
     const appHtml = render(url);
-    const title = meta.title || `${SITE} Web Developer`;
+    const title = meta.title || SITE;
     const description = clamp(meta.description || DEFAULT_DESCRIPTION);
     const canonical = BASE + url;
 

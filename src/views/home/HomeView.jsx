@@ -16,13 +16,12 @@ export default function HomeView() {
                         Available for new opportunities
                     </p>
                     <p className="homeRole">
-                        <span>Web</span> Developer
+                        <span>System</span> Administrator
                     </p>
                     <h1>Carla Deafiaa</h1>
                     <p className="homeBio">
-                        Fullstack developer passionate about building modern web
-                        applications, solving problems, and continuously
-                        improving my skills.
+                        Currently training as a system administrator. I come
+                        from web development and run my own servers at home.
                     </p>
                     <div className="homeCtas">
                         <Link to="/projects" className="btnPrimary">
